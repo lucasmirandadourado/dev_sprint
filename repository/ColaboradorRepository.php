@@ -7,12 +7,9 @@ class ColaboradorRepository {
 
     private static $conexao;
   
-    public function __construct() {
-        // self::$conexao = Conexao::getConexao();
-    }
-    
-    private function __wakeup(){}
-    private function __clone(){}
+    public function __construct() {}    
+    private function __wakeup() {}
+    private function __clone() {}
 
     public function findAll() {
         $sql = "SELECT * FROM colaborador;";
@@ -28,7 +25,7 @@ class ColaboradorRepository {
 
     public function criarColaborador($nome) {
         $sql = "INSERT INTO colaborador(col_nome) VALUES ('$nome') returning col_id;";
-        return self::$conexao::query($sql);
+        return Conexao::query($sql);
     }
     
 }

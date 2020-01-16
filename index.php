@@ -15,10 +15,16 @@ require_once('./template/header.php');
         </thead>
         <tbody id="tabela">
             
-        </tbody>
-    </table>
-</div>
-
+            </tbody>
+        </table>
+        
+        <div id="chartContainer" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
+        
+    </div>
+    
+    
+    
+<script src="./isset/chartjs/canvasjs.min.js"></script>
 <script src="./isset/js/jquery-3.3.1.min.js"></script>
 <script src="./isset/js/jquery.dataTables.min.js"></script>
 <script src="./isset/js/dataTables.bootstrap4.min.js"></script>

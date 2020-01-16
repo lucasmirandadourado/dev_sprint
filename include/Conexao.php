@@ -49,4 +49,14 @@ class Conexao
             return "Erro: " . $th->getMessage();
         }
     }
+
+    public static function query($sql) {
+        try {
+            $conn = Conexao::getConexao();
+            return $conn->query($sql);
+            
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+    }
 }
