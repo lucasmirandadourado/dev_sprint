@@ -1,6 +1,9 @@
 $(document).ready(function () {
     $('#sprint').DataTable();
-    __onFindSprint();
+    // __onFindSprint();
+    let tarefas = [];
+          
+    __onGrafico(null, tarefas, "Teste");
     let data = __onFindTarefas();
 });
 
@@ -37,25 +40,11 @@ function __onFindTarefas() {
 
 function __onGrafico(data, tarefas, nomeGrafico) {
 
-    // var chart = new CanvasJS.Chart("chartContainer", {
-    //     animationEnabled: true,
-    //     theme: "light2",
-    //     title: {text: nomeGrafico},
-    //     axisY: {
-    //         includeZero: false
-    //     },
-    //     data: [{
-    //         type: "line",
-    //         dataPoints: data
-    //     }]
-    // });
-
-
     var chart = new CanvasJS.Chart("chartContainer", {
         animationEnabled: true,
         theme: "light2",
         title:{
-            text: "Dias"
+            text: "Sprint 39"
         },
         axisX:{
             valueFormatString: "DD MMM",
@@ -65,7 +54,7 @@ function __onGrafico(data, tarefas, nomeGrafico) {
             }
         },
         axisY: {
-            title: "Tarefas concluídas",
+            title: "Tarefas",
             crosshair: {
                 enabled: true
             }
@@ -86,19 +75,19 @@ function __onGrafico(data, tarefas, nomeGrafico) {
             name: "Tarefas",
             markerType: "square",
             xValueFormatString: "DD MMM, YYYY",
-            color: "#F08080",
+            color: "#f25e5e",
             dataPoints: [
-                { x: new Date(2020, 0, 3), y: 10 },
-                { x: new Date(2020, 0, 4), y: 10 },
-                { x: new Date(2020, 0, 5), y: 9 },
-                { x: new Date(2020, 0, 6), y: 7 },
-                { x: new Date(2020, 0, 7), y: 6 },
-                { x: new Date(2020, 0, 8), y: 6 },
-                { x: new Date(2020, 0, 9), y: 5 },
-                { x: new Date(2020, 0, 10), y: 5 },
-                { x: new Date(2020, 0, 11), y: 3 },
-                { x: new Date(2020, 0, 12), y: 2 },
-                { x: new Date(2020, 0, 13), y: 0 }
+                { x: new Date(2020, 0, 3), y: 35 },
+                { x: new Date(2020, 0, 4), y: 35 },
+                { x: new Date(2020, 0, 5), y: 32 },
+                { x: new Date(2020, 0, 6), y: 30 },
+                { x: new Date(2020, 0, 7), y: 24 },
+                { x: new Date(2020, 0, 8), y: 24 },
+                { x: new Date(2020, 0, 9), y: 21 },
+                { x: new Date(2020, 0, 10), y: 18 },
+                { x: new Date(2020, 0, 11), y: 9 },
+                { x: new Date(2020, 0, 12), y: 5 },
+                { x: new Date(2020, 0, 13), y: 1 }
             ]
         },
         {
@@ -107,22 +96,22 @@ function __onGrafico(data, tarefas, nomeGrafico) {
             name: "Dias",
             lineDashType: "dash",
             dataPoints: [
-                { x: new Date(2020, 0, 3), y: 10 },
-                { x: new Date(2020, 0, 4), y: 9 },
-                { x: new Date(2020, 0, 5), y: 8 },
-                { x: new Date(2020, 0, 6), y: 7 },
-                { x: new Date(2020, 0, 7), y: 6 },
-                { x: new Date(2020, 0, 8), y: 5 },
-                { x: new Date(2020, 0, 9), y: 4 },
-                { x: new Date(2020, 0, 10), y: 3 },
-                { x: new Date(2020, 0, 11), y: 2 },
-                { x: new Date(2020, 0, 12), y: 1 },
+                { x: new Date(2020, 0, 3), y: 35 },
+                { x: new Date(2020, 0, 4), y: 32 },
+                { x: new Date(2020, 0, 5), y: 28 },
+                { x: new Date(2020, 0, 6), y: 25 },
+                { x: new Date(2020, 0, 7), y: 21 },
+                { x: new Date(2020, 0, 8), y: 18 },
+                { x: new Date(2020, 0, 9), y: 14 },
+                { x: new Date(2020, 0, 10), y: 11 },
+                { x: new Date(2020, 0, 11), y: 7 },
+                { x: new Date(2020, 0, 12), y: 4 },
                 { x: new Date(2020, 0, 13), y: 0 }
             ]
         }]
     });
     chart.render();
-
+    $('.canvasjs-chart-credit').remove();
 }
 
 function toogleDataSeries(e){
@@ -133,3 +122,13 @@ function toogleDataSeries(e){
 	}
 	chart.render();
 }
+
+$('#exampleModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var recipient = button.data('whatever') // Extract info from data-* attributes
+    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    var modal = $(this)
+    modal.find('.modal-title').text('New message to ' + recipient)
+    modal.find('.modal-body input').val(recipient)
+  })
