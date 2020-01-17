@@ -1,10 +1,5 @@
 <?php
 
-define('HOST', 'localhost');
-define('DBNAME', 'dev_sprint');
-define('USER', 'postgres');
-define('PASSWORD', 'postgres');
-
 class Conexao
 {
     private static $pdo;
@@ -15,10 +10,13 @@ class Conexao
 
     public static function getConexao()
     {
+        $envPath = realpath(dirname(__FILE__)."/env.ini");
+        $env = parse_ini_file($envPath);
+        
         if (!isset(self::$pdo)) {
             try {
-                self::$pdo = new PDO("pgsql:host=" . HOST
-                    . "; dbname=" . DBNAME . ";", USER, PASSWORD, null);
+                self::$pdo = new PDO("pgsql:host=" . $env['host']
+                    . "; dbname=" . $env['basename'] . ";", $env['user'], $env['password'], null);
             } catch (PDOException $e) {
                 echo "Erro: " . $e->getMessage();
             }

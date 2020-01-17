@@ -28,16 +28,11 @@ class SprintFactory
 
 if (isset($_POST['buscarSprint'])) {
     $buscar = SprintFactory::repository()->findAll();
-    $row = "";
-    foreach ($buscar as $key => $value) {
-        $data = new DateTime($value->getDataInicio());
-        $row .="<tr>
-                    <td>".$value->getId()."</td>
-                    <td>".$value->getNome()."</td>
-                    <td>".$value->getQtdCol()."</td>
-                    <td>".$data->format('d/m/Y')."</td>
-                </tr>";
+    
+    $select = `<option>Selecione o Sprint</option>`;
+    foreach($buscar as $item) {
+        $select .=  "<option data-id=".$item->getId().">".$item->getNome()."</option>";
     }
-    echo $row;
+    echo $select;
     exit;
 }
