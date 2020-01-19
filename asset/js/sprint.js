@@ -1,21 +1,40 @@
 $(document).ready(function () {
     $('#sprint').DataTable();
-    // __onFindSprint();
+    __onFindSprint();
     let tarefas = [];
           
     __onGrafico(null, tarefas, "Teste");
-    let data = __onFindTarefas();
+    // let data = __onFindTarefas();
+
+    $(document).on('change', '#selecionar-sprints', function(e){
+        let id = $(this).find(':selected').data('id')
+        $.ajax({
+            type: "POST",
+            url: "./controller/SprintController.php",
+            data: {"info_sprint" : id},
+            dataType: 'text',
+            success: function (data) {          
+                let json = JSON.parse(data)
+                $('#horas_trabalhadas').html();
+                $('#qtd_tarefa').html(json.tarefas.length);
+                $('#bugs').html(0);
+            }
+        });
+    });
 });
+
+function horasLancadas(tarefas) {
+    
+}
 
 function __onFindSprint() {
 
     $.ajax({
         type: "POST",
-        url: "./factory/SprintFactory.php",
+        url: "./controller/SprintController.php",
         data: "buscarSprint",
         dataType: 'text',
-        success: function (data) {
-          
+        success: function (data) {          
             $('#selecionar-sprints').html(data)
             $('#tabela').append(data);
         }
@@ -122,13 +141,3 @@ function toogleDataSeries(e){
 	}
 	chart.render();
 }
-
-$('#exampleModal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget) // Button that triggered the modal
-    var recipient = button.data('whatever') // Extract info from data-* attributes
-    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-    var modal = $(this)
-    modal.find('.modal-title').text('New message to ' + recipient)
-    modal.find('.modal-body input').val(recipient)
-  })

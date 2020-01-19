@@ -1,14 +1,13 @@
 <?php 
 require_once('tarefa.php');
 
-class Sprint {
+class Sprint  implements JsonSerializable {
 
     private $id;
 	private $nome;
 	private $dataInicio;
 	private $dataFim;
 	private $qtdCol;
-	private $dateDiasSprint;
 	private $tarefa = array();
     
     public function __construct($nome, $data_inicio, $data_fim, $qtd_col) {
@@ -58,14 +57,6 @@ class Sprint {
 		$this->qtdCol = $qtd_col;
 	}
 
-    public function getDateDiasSprint() {
-        return $this->dateDiasSprint;
-    }
-
-    public function setDateDiasSprint($date_dias_sprint) {
-        $this->dateDiasSprint = $date_dias_sprint;
-    }
-
 	public function getTarefa()	{
 		return $this->tarefa;
 	}
@@ -77,4 +68,15 @@ class Sprint {
 	public function addTarefa($tarefa) {
 		array_push($this->tarefa, $tarefa);
 	}
+
+	public function jsonSerialize() {
+        return [
+            'id'   => $this->getId(),
+			'name' => $this->getNome(),
+			'data_inicio' => $this->getDataInicio(),
+			'data_fim' => $this->getDataFim(),
+			'qtd_colaboradores' => $this->getQtdCol(),
+			'tarefas' => $this->getTarefa()
+		];
+    }
 }

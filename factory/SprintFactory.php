@@ -1,6 +1,7 @@
 <?php
 // var_dump($_POST);
 require_once('./../repository/SprintRepository.php');
+require_once('./../repository/TarefaRepository.php');
 
 class SprintFactory
 {
@@ -24,15 +25,37 @@ class SprintFactory
         }
         return self::$sprintRepository;
     }
-}
 
-if (isset($_POST['buscarSprint'])) {
-    $buscar = SprintFactory::repository()->findAll();
-    
-    $select = `<option>Selecione o Sprint</option>`;
-    foreach($buscar as $item) {
-        $select .=  "<option data-id=".$item->getId().">".$item->getNome()."</option>";
+    public static function cadastrarSprint($form) {
+        $dias = array();
+        $nome = $form['nome'];
+        $qtd = $form['qtdDiasSprint'];
+
+        array_shift($form);
+        array_shift($form);
+        array_shift($form);
+        array_pop($form);
+
+        foreach ($form as $key => $value) {
+            array_push($dias, $value);
+        }
+        $json_dias = json_encode($dias);
+        $sprint = new Sprint($nome, $dias[0], $dias[$qtd-1], 5);
+        $result = self::repository()->save($sprint);
+        return $result;
     }
-    echo $select;
-    exit;
+
+    public static function buscarInfoSprint($id) {
+        $sprintDao = self::repository()->buscarInfoSprint($id);
+       
+        $tarefaDao = new TarefaRepository();
+        $tarefas = $tarefaDao->findAll($id);
+
+        $sprint = new Sprint($sprintDao->getNome(), $sprintDao->getDataInicio(), $sprintDao->getDataInicio(), $sprintDao->getQtdCol());
+        $sprint->setId($sprintDao->getId());
+        foreach ($tarefas as $tarefa) {
+            $sprint->addTarefa($tarefa);
+        }
+        return $sprint;
+    }
 }

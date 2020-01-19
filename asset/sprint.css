@@ -57,6 +57,7 @@ div#conteudo {
     padding-left: 10%;
     padding-right: 10%;
     margin-top: 10px;
+    flex-wrap: nowrap;
 }
 
 #selecionarSprint {
@@ -101,4 +102,22 @@ div#desenvolvedor {
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+#conteudo form {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+div#dias {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#dias .form-group {
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
 }

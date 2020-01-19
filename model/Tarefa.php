@@ -2,7 +2,7 @@
 
 require_once('colaborador.php');
 
-class Tarefa {
+class Tarefa implements JsonSerializable {
 
     private $id;
     private $titulo;    
@@ -107,5 +107,21 @@ class Tarefa {
 
     public function sethorasLancada($horasLancada) {
         $this->horasLancada = $horasLancada;
+    }
+
+    public function jsonSerialize() {
+        return [            
+				'id' => $this->getId(),
+				'titulo' => $this->getTitulo(),
+                'descricao' => $this->getDescricao(),
+                'colaborador' => $this->getColaborador(),
+				'bug' => $this->getBug(),
+				'tarefa_bug' => $this->getTarefaBug(),
+				'data_criacao' => $this->getdataCriacao(),
+                'data_iniciada' => $this->getdataIniciada(),
+                'data_finalizacao' => $this->getDataFinalizada(),
+                'hora_estimada' => $this->gethorasEstimada(),
+                'horas_lancadas' => $this->gethorasLancada()			
+        ];
     }
 }
