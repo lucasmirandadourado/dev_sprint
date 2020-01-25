@@ -1,8 +1,8 @@
 <?php
-  require_once('./template/Pagina.php');
+  require_once('../template/Pagina.php');
   $pagina = new Pagina();
-  $pagina->addCSS('asset/css/sprint.css');
-  $pagina->head();
+  $pagina->addCSS('../asset/css/sprint.css');
+  $pagina->head("Cadastrar Sprint");
 ?>
 
   <div id="conteudo">
@@ -35,11 +35,11 @@
 </div>
 <div id="footer">
   <div id="desenvolvedor">Desenvolvedor: Lucas Dourado</div>
-  <img src="./asset/img/scrum-head.png" class="logo-footer" alt="Dev Sprint">
+  <img src="../asset/img/scrum-head.png" class="logo-footer" alt="Dev Sprint">
 </div>
 
 
 <?php
-  $pagina->addJS('asset/js/cadastrarSprint.js');
+  $pagina->addJS('../asset/js/cadastrarSprint.js');
   $pagina->footer();
 ?>
