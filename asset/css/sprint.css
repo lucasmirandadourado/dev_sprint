@@ -1,6 +1,6 @@
 :root {
     --roxo: rgb(93, 104, 166);
-    --verde: rgba(36, 166, 92, 0.66);
+    --verde: #027368;
     --amarelo: rgb(242, 190, 92);
     --laranja: rgb(242, 145, 61);
     --vermelho: rgb(242, 94, 94);
@@ -13,6 +13,7 @@ body {
     flex-direction: column;
     justify-content: space-between;
     height: -webkit-fill-available;
+    margin: 0;
 }
 
 #menu {

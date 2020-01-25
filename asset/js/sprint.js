@@ -59,6 +59,13 @@ $(document).ready(function () {
     });
 });
 
+$(document).on('click', '#sair', function(e) {
+    $.post('./controller/loginController.php', 'sair', function(data){
+        console.log("RELOAD");
+        if(data) document.location.reload(true);
+    });
+});
+
 function dadosTarefasEntregues(tarefas, dias) {
     let tarefasConcluidas = tarefas.filter(tar => {
         if(tar.tar_data_finalizada != null) return true;
@@ -100,7 +107,7 @@ function __onFindSprint() {
 
 function __onFindTarefas() {
 
-    $.post("./factory/TarefaFactory.php", {"buscarTarefas": 1}, function (data) {
+    $.post("./controller/SprintController.php", {"buscarTarefas": 1}, function (data) {
         let dados = [];
         let size = data.length;        
         $(data).each(function( index, element){

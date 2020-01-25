@@ -25,8 +25,3 @@ class TarefaFactory
     }
 }
 
-if (isset($_POST['buscarTarefas'])) {
-    $buscar = TarefaFactory::repository()->findAll($_POST['buscarTarefas']);  
-    echo json_encode($buscar);    
-    exit;
-}

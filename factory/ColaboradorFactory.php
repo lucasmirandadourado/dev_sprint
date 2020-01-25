@@ -1,10 +1,12 @@
 <?php
 
-require_once('./../repository/ColaboradorRepository.php');
+require_once(dirname(__FILE__).'/../repository/ColaboradorRepository.php');
+require_once(dirname(__FILE__).'/../service/ColaboradorService.php');
 
 class ColaboradorFactory {
     
     private static $colaboradorRepository;
+    private static $colaboradorService;
     
     private function __construct() {}
     private function __wakeup(){}
@@ -16,6 +18,15 @@ class ColaboradorFactory {
         }
         return self::$colaboradorRepository;
     }
+    
+    public static function service(){
+        if(self::$colaboradorService === null){
+            self::$colaboradorService = new ColaboradorService();
+        }
+        return self::$colaboradorService;
+    }
+
+
 }
 
 ?>

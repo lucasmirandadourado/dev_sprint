@@ -1,17 +1,10 @@
 <?php
-require_once('./template/header.php');
+  require_once('./template/Pagina.php');
+  $pagina = new Pagina();
+  $pagina->addCSS('asset/css/sprint.css');
+  $pagina->head();
 ?>
 
-<link rel="stylesheet" href="asset/sprint.css">
-<div>
-  <div id="menu">
-    <a href="/dev_sprint"><img src="./asset/img/scrum-head.png" class="logo" alt="Dev Sprint"></a>
-    <div id="menu-itens">
-      <a href="#" id="tarefas">TAREFAS</a>
-      <a href="./cadastrar-sprint.php" id="sprints">SPRINT</a>
-      <!-- <a href="#">SAIR</a> -->
-    </div>
-  </div>
   <div id="conteudo">
     <form id="formCadastrar">
       <div class="row">
@@ -45,11 +38,8 @@ require_once('./template/header.php');
   <img src="./asset/img/scrum-head.png" class="logo-footer" alt="Dev Sprint">
 </div>
 
-<script src="./asset/chartjs/canvasjs.min.js"></script>
-<script src="./asset/js/jquery-3.3.1.min.js"></script>
-<script src="./asset/js/jquery.dataTables.min.js"></script>
-<script src="./asset/js/dataTables.bootstrap4.min.js"></script>
-<script src="./asset/js/cadastrarSprint.js"></script>
+
 <?php
-require_once('./template/footer.php');
+  $pagina->addJS('asset/js/cadastrarSprint.js');
+  $pagina->footer();
 ?>

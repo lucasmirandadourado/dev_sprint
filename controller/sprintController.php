@@ -24,3 +24,10 @@ if(isset($_POST['info_sprint'])) {
     echo json_encode($info, JSON_OBJECT_AS_ARRAY);
     exit;
 }
+
+
+if (isset($_POST['buscarTarefas'])) {
+    $buscar = TarefaFactory::repository()->findAll($_POST['buscarTarefas']);  
+    echo json_encode($buscar);    
+    exit;
+}
