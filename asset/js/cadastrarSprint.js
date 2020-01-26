@@ -14,13 +14,33 @@ $(document).ready(function(e){
 
     $(document).on('click', '#salvar-sprint', function(e){
         e.preventDefault();
-        let form = $('#formCadastrar').serializeArray();
-        form.push({name: 'salvarSprint', value: true})
-        // console.log(form)
+        
+        var t = $('#tarefas-tabela').DataTable();
+        let tarefas = t.data();
+        let array = new Array();
+        $(tarefas).each(function (index, element) {
+            if(element != null) {
+                array.push(Array(element[0], element[1], element[2], element[3]));
+            }
+        });
+
+        let nome = $('#nome').val();
+        let dias = $('#qtdDiasSprint').val();
+        let qtdDev = $('#qtdDevs').val();
+        let data = {
+            "salvarSprint": true,
+            "sprint": {
+                "nome": nome,
+                "dias": dias,
+                "qtdDev": qtdDev
+            },
+            "tarefas": array
+        }
+
         $.ajax({
-            url: './controller/sprintController.php',
+            url: '../controller/sprintController.php',
             method: "POST",
-            data: form,
+            data: data,
             dataType: 'json',
             success: function(result) {
                 console.log(result)
@@ -36,15 +56,13 @@ $(document).ready(function(e){
         let tempoEstimativa = $('#tempoEstimativa').val();
         
         var t = $('#tarefas-tabela').DataTable();
-
-        
-            t.row.add( [
-                codigo,
-                titulo,
-                descricao,
-                tempoEstimativa,
-                `<a href='#'><img id='excluir' data-id='${codigo}' src='../asset/icon/close-24px.svg'></a>`
-            ] ).draw( false );
+        t.row.add( [
+            codigo,
+            titulo,
+            descricao,
+            tempoEstimativa,
+            `<a href='#'><img id='excluir' data-id='${codigo}' src='../asset/icon/close-24px.svg'></a>`
+        ] ).draw( false );
           
     });
 });

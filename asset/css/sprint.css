@@ -130,3 +130,16 @@ div#dias {
 #excluir {
     color: var(--vermelho);
 }
+
+h1.sp_titulo {
+    font-size: 1.7rem;
+    color: var(--laranja);
+    margin-top: 10px;
+}
+
+hr.sp_divisao {
+    width: 100%;
+    margin-top: 0px;
+    border-top: outset;
+    border-color: var(--laranja);
+}

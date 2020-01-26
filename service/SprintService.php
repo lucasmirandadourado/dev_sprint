@@ -1,30 +1,42 @@
 <?php
 
 require_once(dirname(__FILE__).'/../model/Tarefa.php');
+require_once(dirname(__FILE__).'/../factory/SprintFactory.php');
 
 class SprintService {
 
-    public function __construct() {
-        $tarefa = new Tarefa("Titulo", '2:00');
-        $tarefa->setCodigo('2012');
-        $tarefa->setDescricao("Descricao da tarefa");
-        $tarefa->setHorasEstimada('2:00');
-        echo $this->gerarRow($tarefa);
+    public function __construct() { }
 
+    public static function cadastrarSprint($form) {
+        $dias = array();
+        $nome = $form['nome'];
+        $qtd = $form['qtdDiasSprint'];
+
+        array_shift($form);
+        array_shift($form);
+        array_shift($form);
+        array_pop($form);
+
+        foreach ($form as $key => $value) {
+            array_push($dias, $value);
+        }
+        $json_dias = json_encode($dias);
+        $sprint = new Sprint($nome, $dias[0], $dias[$qtd-1], 5);
+        $result = SprintFactory::repository()->save($sprint);
+        return $result;
     }
 
-    public function gerarRow(Tarefa $tarefa) {
-        return "<tr>
-                    <th>".$tarefa->getCodigo()."</th>
-                    <th>".$tarefa->getTitulo()."</th>
-                    <th>".$tarefa->getDescricao()."</th>
-                    <th>".$tarefa->getHorasEstimada()."</th>
-                    <th class='acoes'>
-                    <a href='#'><img id='editar' data-id='".$tarefa->getId()."' src='../asset/icon/edit-24px.svg'></a>
-                    <a href='#'><img id='excluir' data-id='".$tarefa->getId()."' src='../asset/icon/close-24px.svg'></a>
-                    </th>
-                </tr>";
+    public static function buscarInfoSprint($id) {
+        $sprintDao = SprintFactory::repository()->buscarInfoSprint($id);
+       
+        $tarefaDao = new TarefaRepository();
+        $tarefas = $tarefaDao->findAll($id);
+
+        $sprint = new Sprint($sprintDao->getNome(), $sprintDao->getDataInicio(), $sprintDao->getDataInicio(), $sprintDao->getQtdCol());
+        $sprint->setId($sprintDao->getId());
+        foreach ($tarefas as $tarefa) {
+            $sprint->addTarefa($tarefa);
+        }
+        return $sprint;
     }
 }
-
-$tar = new SprintService();

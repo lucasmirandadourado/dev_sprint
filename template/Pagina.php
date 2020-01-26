@@ -59,7 +59,14 @@ class Pagina {
         foreach ($this->js as $value) {
             echo "<script src=".$value."></script>";
         }        
-        echo "</body>        
+        echo "
+        
+        <div id='footer'>
+            <div id='desenvolvedor'>Desenvolvedor: Lucas Dourado</div>
+            <img src='../asset/img/scrum-head.png' class='logo-footer' alt='Dev Sprint'>
+        </div>
+
+        </body>        
         </html>";
     }
 }

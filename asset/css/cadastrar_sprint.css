@@ -18,3 +18,16 @@ div#btn-salvar-tarefas {
     font-size: 1.1em;
     margin: 7px 0px;
 }
+
+#addTarefaTabela {
+    color: white;
+    background-color: var(--laranja);
+    border-color: var(--laranja);
+}
+
+@media(max-width: 725px) {
+    .sp-cadastro-sprint {
+        display: flex;
+        flex-direction: column;
+    }
+}
