@@ -1,10 +1,14 @@
 $(document).ready(function(e){
 
+
+    $('#exampleModal').on('shown.bs.modal', function () {
+        $('#exampleModal').medal('show')
+    })
+
     $('#tarefas-tabela').DataTable();
 
     $(document).on('change', '#qtdDiasSprint', function(e){
         let dias = $('#qtdDiasSprint').val();
-        console.log(dias);
         adicionarDias(dias);
     });
 
@@ -22,7 +26,27 @@ $(document).ready(function(e){
                 console.log(result)
             }
         });
-    })
+    });
+
+    $(document).on('click', '#addTarefaTabela', function(e){
+        e.preventDefault();
+        let codigo = $('#codigo').val();
+        let titulo = $('#titulo').val();
+        let descricao = $('#descricao').val();
+        let tempoEstimativa = $('#tempoEstimativa').val();
+        
+        var t = $('#tarefas-tabela').DataTable();
+
+        
+            t.row.add( [
+                codigo,
+                titulo,
+                descricao,
+                tempoEstimativa,
+                `<a href='#'><img id='excluir' data-id='${codigo}' src='../asset/icon/close-24px.svg'></a>`
+            ] ).draw( false );
+          
+    });
 });
 
 function adicionarDias(quantidade) {

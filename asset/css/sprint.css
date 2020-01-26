@@ -47,18 +47,18 @@ a {
 }
 
 a:hover {
-    /* color: var(--roxo); */
     font-size: 18px;
     color: white;
     text-decoration: none;
 }
 
-div#conteudo {
+div#ds_conteudo {
     display: flex;
     padding-left: 10%;
     padding-right: 10%;
     margin-top: 10px;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
+    flex-direction: column;
 }
 
 #selecionarSprint {
@@ -105,7 +105,7 @@ div#desenvolvedor {
     justify-content: center;
 }
 
-#conteudo form {
+#ds_conteudo form {
     display: flex;
     flex: 1;
     flex-direction: column;

@@ -5,7 +5,7 @@
   $pagina->head("Home");
 ?>
 
-  <div id="conteudo">
+  <div id="ds_conteudo">
     <div id="selecionarSprint">
       <select name="selecionar-sprints" id="selecionar-sprints"></select>
       <div id="info">

@@ -1,0 +1,20 @@
+div#addTarefa {
+    background-color: #dddddd87;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+div#btn-salvar-tarefas {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    float: right;
+    margin: 0 2px;
+}
+
+#addTarefa h4 {
+    color: #3e3b3be0;
+    font-size: 1.1em;
+    margin: 7px 0px;
+}
