@@ -28,6 +28,24 @@
       <div id="dias">
 
       </div>
+
+      <div id="tabela">
+        <table id="tarefas-tabela" class="table table-striped table-bordered" style="width:100%">
+          <thead>
+            <tr>
+              <th>Código</th>
+              <th>Tarefa</th>
+              <th>Descrição</th>
+              <th>Horas estimadas</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="conteudo">
+            
+          </tbody>
+        </table>
+      </div>
+
       <button type="submit" id="salvar-sprint" class="btn btn-primary">Salvar</button>
     </form>
   </div>

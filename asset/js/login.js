@@ -8,7 +8,8 @@ $('button').click(function (e) {
 
     $.post('./controller/loginController.php', data, function (data, status) {
         if (data) {
-            window.location.href = 'index.php';
+            console.log(data);
+            window.location.href = './view/index.php';
         } else {
             $('#mensagem').html('Senha errada');
         }

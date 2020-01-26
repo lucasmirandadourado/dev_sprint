@@ -22,7 +22,7 @@ $(document).ready(function () {
         let id = $(this).find(':selected').data('id')
         $.ajax({
             type: "POST",
-            url: "./controller/SprintController.php",
+            url: "../controller/SprintController.php",
             data: {"info_sprint" : id},
             dataType: 'json',
             success: function (data) {          
@@ -59,13 +59,6 @@ $(document).ready(function () {
     });
 });
 
-$(document).on('click', '#sair', function(e) {
-    $.post('./controller/loginController.php', 'sair', function(data){
-        console.log("RELOAD");
-        if(data) document.location.reload(true);
-    });
-});
-
 function dadosTarefasEntregues(tarefas, dias) {
     let tarefasConcluidas = tarefas.filter(tar => {
         if(tar.tar_data_finalizada != null) return true;
@@ -94,7 +87,7 @@ function __onFindSprint() {
 
     $.ajax({
         type: "POST",
-        url: "./controller/SprintController.php",
+        url: "../controller/SprintController.php",
         data: "buscarSprint",
         dataType: 'text',
         success: function (data) {          

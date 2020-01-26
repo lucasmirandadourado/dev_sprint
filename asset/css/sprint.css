@@ -122,3 +122,11 @@ div#dias {
     flex-direction: column;
     margin: 5px;
 }
+
+#editar {
+    color: var(--verde);
+}
+
+#excluir {
+    color: var(--vermelho);
+}

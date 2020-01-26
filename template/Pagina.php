@@ -1,4 +1,5 @@
 <?php
+session_start();
 class Pagina {
 
     private $js = array();
@@ -10,6 +11,7 @@ class Pagina {
         array_push($this->js, '../asset/js/jquery-3.3.1.min.js');
         array_push($this->js, '../asset/js/jquery.dataTables.min.js');
         array_push($this->js, '../asset/js/dataTables.bootstrap4.min.js');
+        array_push($this->js, '../asset/js/page.js');
     
         array_push($this->css, '../asset/css/bootstrap.min.css');     
     }
@@ -38,7 +40,7 @@ class Pagina {
             <a href="./"><img src="../asset/img/scrum-head.png" class="logo" alt="Dev Sprint"></a>
             <div id="menu-itens">
             <a href="#" id="tarefas">TAREFAS</a>
-            <a href="./view/cadastrar-sprint.php" id="sprints">SPRINT</a>
+            <a href="../view/cadastrar-sprint.php" id="sprints">SPRINT</a>
             <a href="#" id="sair">SAIR</a>
             </div>
         </div>

@@ -20,16 +20,26 @@ body {
     border-radius: 5px;
 }
 
-.alinhamento-central .item {
-    flex: 0;
-}
-
 .item {
     text-align: left;
     font-size: 1.5em;
+    flex: 0.8;
 }
 
 section.container.alinhamento-central {
     background-color: #efefef;
     box-shadow: 2px 2px #2b2727a6;
+    display: flex;
+}
+
+.item .row .form-group {
+    width: 100%;
+}
+
+.row #imagem {
+    width: 100px;
+}
+
+div#logo {
+    justify-content: center;
 }

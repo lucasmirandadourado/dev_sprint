@@ -1,5 +1,7 @@
 $(document).ready(function(e){
 
+    $('#tarefas-tabela').DataTable();
+
     $(document).on('change', '#qtdDiasSprint', function(e){
         let dias = $('#qtdDiasSprint').val();
         console.log(dias);

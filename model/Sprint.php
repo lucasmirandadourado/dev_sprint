@@ -3,7 +3,7 @@ require_once('tarefa.php');
 
 class Sprint  implements JsonSerializable {
 
-    private $id;
+	private $id;
 	private $nome;
 	private $dataInicio;
 	private $dataFim;

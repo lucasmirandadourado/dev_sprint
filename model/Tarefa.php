@@ -5,11 +5,12 @@ require_once('colaborador.php');
 class Tarefa implements JsonSerializable {
 
     private $id;
+    private $codigo;
     private $titulo;    
     private $descricao;
     private $colaborador;
-    private $bug;
-    private $tarefaBug;
+    private $bug = false;
+    private $tarefaBug = null;
     private $dataCriacao;
     private	$dataIniciada;
     private	$dataFinalizada;
@@ -19,6 +20,7 @@ class Tarefa implements JsonSerializable {
     public function __construct($titulo, $horasEstimada) {
         $this->titulo = $titulo;
         $this->horasEstimadas = $horasEstimada;
+        $this->setdataCriacao(date('d-m-Y'));
     }
 
     public function getId() {
@@ -29,6 +31,14 @@ class Tarefa implements JsonSerializable {
         $this->id = $id;
     }
 
+    public function getCodigo() {
+		return $this->codigo;
+	}
+
+	public function setCodigo($codigo) {
+		$this->codigo = $codigo;
+    }
+    
     public function getTitulo(){
         return $this->titulo;
     }
@@ -93,11 +103,11 @@ class Tarefa implements JsonSerializable {
         $this->dataFinalizada = $dataFinalizada;
     }
 
-    public function gethorasEstimada() {
+    public function getHorasEstimada() {
         return $this->horasEstimada;
     }
 
-    public function sethorasEstimada($horasEstimada) {
+    public function setHorasEstimada($horasEstimada) {
         $this->horasEstimada = $horasEstimada;
     }
 
@@ -112,6 +122,7 @@ class Tarefa implements JsonSerializable {
     public function jsonSerialize() {
         return [            
 				'id' => $this->getId(),
+				'codigo' => $this->getCodigo(),
 				'titulo' => $this->getTitulo(),
                 'descricao' => $this->getDescricao(),
                 'colaborador' => $this->getColaborador(),
