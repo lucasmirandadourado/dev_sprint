@@ -19,7 +19,7 @@ class Tarefa implements JsonSerializable {
  
     public function __construct($titulo, $horasEstimada) {
         $this->titulo = $titulo;
-        $this->horasEstimadas = $horasEstimada;
+        $this->setHorasEstimada($horasEstimada);
         $this->setdataCriacao(date('d-m-Y'));
     }
 

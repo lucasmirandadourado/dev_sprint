@@ -53,7 +53,7 @@ $pagina->head("Cadastrar Sprint");
 
         <div class="form-group col-md-12">
           <label for="descricao">Descrição</label>
-          <textarea name="descricao" id="" cols="30" rows="3" class="form-control" id="descricao"></textarea>
+          <textarea name="descricao" id="descricao" rows="3" class="form-control"></textarea>
         </div>
 
       </div>

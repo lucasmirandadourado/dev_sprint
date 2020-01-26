@@ -1,4 +1,4 @@
-$(document).ready(function(e){
+$(document).ready(function (e) {
 
 
     $('#exampleModal').on('shown.bs.modal', function () {
@@ -7,20 +7,27 @@ $(document).ready(function(e){
 
     $('#tarefas-tabela').DataTable();
 
-    $(document).on('change', '#qtdDiasSprint', function(e){
+    $(document).on('change', '#qtdDiasSprint', function (e) {
         let dias = $('#qtdDiasSprint').val();
         adicionarDias(dias);
     });
 
-    $(document).on('click', '#salvar-sprint', function(e){
+    $(document).on('click', '#salvar-sprint', function (e) {
         e.preventDefault();
-        
+
         var t = $('#tarefas-tabela').DataTable();
         let tarefas = t.data();
         let array = new Array();
         $(tarefas).each(function (index, element) {
-            if(element != null) {
-                array.push(Array(element[0], element[1], element[2], element[3]));
+            if (element != null) {
+                array.push(
+                    {
+                        "codigo" : element[0],
+                        "titulo": element[1],
+                        "descricao" : element[2],
+                        "horasEstimada": element[3]
+                    }
+                );
             }
         });
 
@@ -42,28 +49,28 @@ $(document).ready(function(e){
             method: "POST",
             data: data,
             dataType: 'json',
-            success: function(result) {
+            success: function (result) {
                 console.log(result)
             }
         });
     });
 
-    $(document).on('click', '#addTarefaTabela', function(e){
+    $(document).on('click', '#addTarefaTabela', function (e) {
         e.preventDefault();
         let codigo = $('#codigo').val();
         let titulo = $('#titulo').val();
         let descricao = $('#descricao').val();
         let tempoEstimativa = $('#tempoEstimativa').val();
-        
+
         var t = $('#tarefas-tabela').DataTable();
-        t.row.add( [
+        t.row.add([
             codigo,
             titulo,
             descricao,
             tempoEstimativa,
             `<a href='#'><img id='excluir' data-id='${codigo}' src='../asset/icon/close-24px.svg'></a>`
-        ] ).draw( false );
-          
+        ]).draw(false);
+
     });
 });
 

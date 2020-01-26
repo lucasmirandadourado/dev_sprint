@@ -8,22 +8,21 @@ class SprintService {
     public function __construct() { }
 
     public static function cadastrarSprint($form) {
-        $dias = array();
-        $nome = $form['nome'];
-        $qtd = $form['qtdDiasSprint'];
+        $sprint = $form['sprint'];
+        $tarefas = $form['tarefas'];
+        // var_dump($sprint);
+        $spt = new Sprint($sprint['nome'], $sprint['dataInicio'], $sprint['dataTermino'], $sprint['qtdDev']);
+        SprintFactory::repository()->save($spt);
 
-        array_shift($form);
-        array_shift($form);
-        array_shift($form);
-        array_pop($form);
-
-        foreach ($form as $key => $value) {
-            array_push($dias, $value);
-        }
-        $json_dias = json_encode($dias);
-        $sprint = new Sprint($nome, $dias[0], $dias[$qtd-1], 5);
-        $result = SprintFactory::repository()->save($sprint);
-        return $result;
+        // foreach ($tarefas as $tarefa) {
+        
+        //     $tar = new Tarefa($tarefa['titulo'], $tarefa['horasEstimada']);
+        //     $tar->setCodigo($tarefa['codigo']);
+        //     $tar->setDescricao($tarefa['descricao']);
+            
+        //     TarefaFactory::repository()->save($tar);
+        // }
+        return '';
     }
 
     public static function buscarInfoSprint($id) {
