@@ -29,7 +29,7 @@
                     <input type="password" class="form-control" id="senha" name="senha">
                 </div>
             </div>
-            <div class="row">
+            <div class="row logo-btn">
                 <button class="btn btn-success">Entrar</button>
             </div>
         </form>

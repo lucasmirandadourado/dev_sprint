@@ -14,6 +14,8 @@ class Pagina {
         array_push($this->js, '../asset/js/page.js');
     
         array_push($this->css, '../asset/css/bootstrap.min.css');     
+        array_push($this->css, '../asset/css/sprint.css');     
+        
     }
 
     public function head($nomeSprint = "") {       
@@ -26,16 +28,15 @@ class Pagina {
                 <meta http-equiv='X-UA-Compatible' content='ie=edge'>
                 <title>Dev Sprint - $nomeSprint</title>
                 
-                <link rel='shortcut icon' type='image/x-icon' href='../asset/img/icon.ico'/>
-                ";
+                <link rel='shortcut icon' type='image/x-icon' href='../asset/img/icon.ico'/>";
         
             foreach ($this->css as $value) {
                 echo '<link rel="stylesheet" href='.$value.'>';            
             }
-        
+            
         echo '</head><body>
         
-        <div>
+        <div class="sp-container">
         <div id="menu">
             <a href="./"><img src="../asset/img/scrum-head.png" class="logo" alt="Dev Sprint"></a>
             <div id="menu-itens">

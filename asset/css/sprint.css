@@ -52,6 +52,12 @@ a:hover {
     text-decoration: none;
 }
 
+.sp-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
 div#ds_conteudo {
     display: flex;
     padding-left: 10%;
@@ -59,6 +65,7 @@ div#ds_conteudo {
     margin-top: 10px;
     flex-wrap: wrap;
     flex-direction: column;
+    /* height: 100%; */
 }
 
 #selecionarSprint {

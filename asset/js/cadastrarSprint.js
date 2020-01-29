@@ -1,6 +1,5 @@
 $(document).ready(function (e) {
 
-
     $('#exampleModal').on('shown.bs.modal', function () {
         $('#exampleModal').medal('show')
     })
@@ -12,36 +11,21 @@ $(document).ready(function (e) {
         adicionarDias(dias);
     });
 
-    $(document).on('click', '#salvar-sprint', function (e) {
+    $(document).on('click', '#sp-salvar-sprint', function (e) {
         e.preventDefault();
-
-        var t = $('#tarefas-tabela').DataTable();
-        let tarefas = t.data();
-        let array = new Array();
-        $(tarefas).each(function (index, element) {
-            if (element != null) {
-                array.push(
-                    {
-                        "codigo" : element[0],
-                        "titulo": element[1],
-                        "descricao" : element[2],
-                        "horasEstimada": element[3]
-                    }
-                );
-            }
-        });
 
         let nome = $('#nome').val();
         let dias = $('#qtdDiasSprint').val();
         let qtdDev = $('#qtdDevs').val();
+        let datas = $('input[name="data[]"]').serializeArray();
         let data = {
             "salvarSprint": true,
             "sprint": {
                 "nome": nome,
                 "dias": dias,
-                "qtdDev": qtdDev
-            },
-            "tarefas": array
+                "qtdDev": qtdDev,
+                "datas": datas
+            }
         }
 
         $.ajax({
@@ -50,27 +34,25 @@ $(document).ready(function (e) {
             data: data,
             dataType: 'json',
             success: function (result) {
-                console.log(result)
+                console.log(result);
+                if(result[0]) {
+                    window.location = './cadastrar-tarefas.php';
+                }
             }
         });
     });
 
-    $(document).on('click', '#addTarefaTabela', function (e) {
-        e.preventDefault();
-        let codigo = $('#codigo').val();
-        let titulo = $('#titulo').val();
-        let descricao = $('#descricao').val();
-        let tempoEstimativa = $('#tempoEstimativa').val();
 
-        var t = $('#tarefas-tabela').DataTable();
-        t.row.add([
-            codigo,
-            titulo,
-            descricao,
-            tempoEstimativa,
-            `<a href='#'><img id='excluir' data-id='${codigo}' src='../asset/icon/close-24px.svg'></a>`
-        ]).draw(false);
-
+    $(document).on('change', '#qtdDiasSprint', function () {
+        let qtd = $('#qtdDiasSprint').val();
+        $('.datas-dias').html('');
+        for (let i = 1; i <= qtd; i++) {
+            let dias = `<div class="form-group mx-1 data-item">
+                            <label for="data_${i}">Dias ${i}</label>
+                            <input type="date" class="form-control" id="data_${i}" name="data[]">
+                        </div>`;
+            $('.datas-dias').append(dias);
+        }
     });
 });
 

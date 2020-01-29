@@ -25,6 +25,21 @@ div#btn-salvar-tarefas {
     border-color: var(--laranja);
 }
 
+.datas-dias {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.data-item {
+    flex-flow: row wrap;
+}
+
+#sp-salvar-sprint {
+    background-color: var(--laranja);
+    border: 1px solid var(--laranja);
+    float: right;
+}
+
 @media(max-width: 725px) {
     .sp-cadastro-sprint {
         display: flex;

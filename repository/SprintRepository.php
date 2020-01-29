@@ -31,7 +31,7 @@ class SprintRepository {
     public function save(Sprint $sprint) {
         $data_inicio = new DateTime($sprint->getDataInicio());
         $data_fim = new DateTime($sprint->getDataFim());
-       echo $sql = "INSERT INTO sprint(
+        $sql = "INSERT INTO sprint(
             spt_nome, 
             spt_data_inicio, 
             spt_data_fim, 
@@ -40,9 +40,10 @@ class SprintRepository {
         $sprint->getNome()."', '".
         $data_inicio->format('yy-m-d')."', '".
         $data_fim->format('yy-m-d')."', ".
-        $sprint->getQtdCol().");";
+        $sprint->getQtdCol().") returning spt_id;";
 
-        return Conexao::query($sql) === false ? false : true;
+        $return = Conexao::fetch($sql); 
+        return  $return === false ? false : array(true, $return['spt_id']);
     }
 
     public function buscarInfoSprint($id) {

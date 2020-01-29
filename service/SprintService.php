@@ -9,20 +9,13 @@ class SprintService {
 
     public static function cadastrarSprint($form) {
         $sprint = $form['sprint'];
-        $tarefas = $form['tarefas'];
-        // var_dump($sprint);
-        $spt = new Sprint($sprint['nome'], $sprint['dataInicio'], $sprint['dataTermino'], $sprint['qtdDev']);
-        SprintFactory::repository()->save($spt);
-
-        // foreach ($tarefas as $tarefa) {
+        $nome = $sprint['nome'];
+        $qtdDev = $sprint['qtdDev'];
+        $dias = $sprint['dias'];
+        $datas = $sprint['datas'];
         
-        //     $tar = new Tarefa($tarefa['titulo'], $tarefa['horasEstimada']);
-        //     $tar->setCodigo($tarefa['codigo']);
-        //     $tar->setDescricao($tarefa['descricao']);
-            
-        //     TarefaFactory::repository()->save($tar);
-        // }
-        return '';
+        $spt = new Sprint($nome, $datas[0]['value'], $datas[$dias-1]['value'], $qtdDev);
+        return SprintFactory::repository()->save($spt);
     }
 
     public static function buscarInfoSprint($id) {
