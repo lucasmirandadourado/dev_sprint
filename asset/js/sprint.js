@@ -16,8 +16,7 @@ $(document).ready(function () {
             { x: new Date(2020, 0, 13), y: 0 }
         ];
     __onGrafico(data, tarefas, "Teste");
-    // let data = __onFindTarefas();
-
+    
     $(document).on('change', '#selecionar-sprints', function(e){
         let id = $(this).find(':selected').data('id')
         $.ajax({
@@ -56,6 +55,16 @@ $(document).ready(function () {
                 __onGrafico(dados, tarefas, data.name);
             }
         });
+    });
+
+    $(document).on('click', '#spt-editarSprint', function(e){
+        let sprint = $("option:selected").val();
+        if(sprint > 0 && sprint !== undefined ) {
+            $('#mensagem').html('');
+            window.location = `./cadastrar-tarefas.php?sprint=${sprint}`;
+        } else {
+            $('#mensagem').html('Selecione o sprint.');
+        }
     });
 });
 

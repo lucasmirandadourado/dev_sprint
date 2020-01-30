@@ -10,7 +10,6 @@
       <select name="selecionar-sprints" id="selecionar-sprints"></select>
       <div id="info">
         <table class="table">
-
           <tbody>
             <tr>
               <td>Horas trabalhadas</td>
@@ -28,6 +27,11 @@
         </table>
       </div>
 
+      <div id="editarSprint">
+        <a href="#" class="btn" id="spt-editarSprint">Editar</a>
+      </div>
+
+      <div id="mensagem"></div>
     </div>
     <div id="grafico">
       <div id="chartContainer" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>

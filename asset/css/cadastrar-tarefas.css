@@ -1,0 +1,10 @@
+div#addTarefa {
+    padding: 15px 0;
+}
+
+#addTarefa .row form {
+    display: flex;
+    flex: 1;
+    height: 100vh;
+    flex-direction: column;
+}

@@ -6,6 +6,13 @@
     --vermelho: rgb(242, 94, 94);
     --cinza: #a9b9d347;
 }
+
+*, ::after, ::before {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 body {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     background-color: #fafafa0f;
@@ -64,8 +71,6 @@ div#ds_conteudo {
     padding-right: 10%;
     margin-top: 10px;
     flex-wrap: wrap;
-    flex-direction: column;
-    /* height: 100%; */
 }
 
 #selecionarSprint {
@@ -149,4 +154,63 @@ hr.sp_divisao {
     margin-top: 0px;
     border-top: outset;
     border-color: var(--laranja);
+}
+
+div#editarSprint {
+    display: flex;
+    justify-content: right;
+    align-items: flex-end;
+    flex-direction: column;
+    margin: 0px 12px;
+}
+
+#editarSprint a.btn {
+    background-color: #ef9538;
+    color: white;
+}
+
+@media(max-width: 500px) {
+    div#ds_conteudo {
+        flex-direction: column;
+    }
+}
+
+div#info-sprint {
+    display: flex;
+    justify-content: center;
+}
+
+#info-sprint div {
+    color: #f7f7f7;
+    background-color: #26b16a;
+    border-color: #26b16a;
+    width: 90%;
+    margin-top: 20px;
+}
+
+#info-sprint div .form-group {
+    margin: 0px;
+    padding: 0px;
+}
+
+span#nome-sprint, span#colaborador-sprint, span#dias-sprint {
+    color: var(--amarelo);
+    font-weight: 400;
+    margin-left: 6px;
+}
+
+#info-sprint div h3 {
+    font-size: 1.8em;
+    text-align: center;
+}
+
+#tarefas-form {
+    display: flex;
+    flex-direction: column;
+}
+
+#btn-right {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 1px;
 }
