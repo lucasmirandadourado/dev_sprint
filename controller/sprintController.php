@@ -15,8 +15,7 @@ if (isset($_POST['buscarSprint'])) {
 }
 
 if (isset($_POST['salvarSprint'])) {
-    $buscar = SprintFactory::serice()->cadastrarSprint($_POST);
-    echo json_encode($buscar);
+    echo json_encode(SprintFactory::serice()->cadastrarSprint($_POST));
     exit;
 }
 

@@ -9,6 +9,7 @@ class Sprint  implements JsonSerializable {
 	private $dataFim;
 	private $qtdCol;
 	private $tarefa = array();
+	private $dias = array();
     
     public function __construct($nome, $data_inicio, $data_fim, $qtd_col) {
         $this->nome = $nome;
@@ -67,6 +68,14 @@ class Sprint  implements JsonSerializable {
 
 	public function addTarefa($tarefa) {
 		array_push($this->tarefa, $tarefa);
+	}
+
+	public function getDatas() {
+		return $this->dias;
+	}
+
+	public function addDia($data) {
+		array_push($this->dias, $data);
 	}
 
 	public function jsonSerialize() {

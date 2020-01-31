@@ -10,6 +10,7 @@ $pagina->head("Cadastrar Tarefas");
     <div id="info-sprint" class="row">
         <div class="alert alert-info" role="alert">
             <h3>Informações do Sprint</h3>
+            <input type="hidden" name="sprint_id" id="sprint_id" value="<?=$_GET['sprint']?>">
             <div class="form-group">
                 <label for="nome-sprint">Nome Sprint: </label><span id="nome-sprint"></span>
             </div>
@@ -52,7 +53,7 @@ $pagina->head("Cadastrar Tarefas");
                 </div>
             </div>
 
-            <div class="row" id="btn-right">
+            <div class="row" id="sabtn-right">
                 <button type="submit" id="salvar-sprint" class="btn btn-primary">Salvar</button>
             </div>
         </form>

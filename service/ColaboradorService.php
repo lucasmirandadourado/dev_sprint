@@ -1,4 +1,5 @@
 <?php 
+require_once(dirname(__FILE__).'/../Exception/SprintException.php');
 require_once(dirname(__FILE__).'/../model/Colaborador.php');
 session_start();
 
@@ -7,7 +8,7 @@ class ColaboradorService {
     public static function logar($login, $senha) {
         $usuario = ColaboradorFactory::repository()->find($login, $senha);
         if($usuario === false) {
-            return "Houve uma falha na autenticação do sistema. Verifique o que houve.";
+            throw new SprintException("Houve uma falha na autenticação do sistema. Verifique o que houve.", 500, null);           
         } else {
             if($usuario != null && $usuario->getStatus()) {
                 $_SESSION['login'] = true;                
@@ -19,7 +20,7 @@ class ColaboradorService {
                 $_SESSION['usuario_status'] = $usuario->getStatus();
                 return true;
             } else {
-                $_SESSION['login'] = false;
+               return new SprintException("Informações do usuário estão errados.", 1, null);                
             }
         }
     }
