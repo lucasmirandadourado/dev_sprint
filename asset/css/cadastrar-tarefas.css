@@ -8,3 +8,11 @@ div#addTarefa {
     height: 100vh;
     flex-direction: column;
 }
+
+div#sabtn-right {
+    justify-content: flex-end;
+}
+
+span.select2.select2-container.select2-container--default {
+    width: 100% !important;
+}

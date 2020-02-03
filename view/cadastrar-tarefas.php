@@ -10,7 +10,7 @@ $pagina->head("Cadastrar Tarefas");
     <div id="info-sprint" class="row">
         <div class="alert alert-info" role="alert">
             <h3>Informações do Sprint</h3>
-            <input type="hidden" name="sprint_id" id="sprint_id" value="<?=$_GET['sprint']?>">
+            <input type="hidden" name="sprint_id" id="sprint_id" value="<?= $_GET['sprint'] ?>">
             <div class="form-group">
                 <label for="nome-sprint">Nome Sprint: </label><span id="nome-sprint"></span>
             </div>
@@ -27,7 +27,9 @@ $pagina->head("Cadastrar Tarefas");
     <div id="addTarefa">
         <h4 for="">Adicionar Tarefa</h4>
         <form action="" id="tarefas-form" method="post">
+
             <div class="row">
+                <input type="hidden" name="id" id="id" value="">
 
                 <div class="form-group col-md-2">
                     <label for="codigo">Código</label>
@@ -47,14 +49,22 @@ $pagina->head("Cadastrar Tarefas");
 
             <div class="row">
 
-                <div class="form-group col-md-12">
+                <div class="form-group col-md-3">
+                    <label for="colaborador">Colaborador</label>
+                    <select name="colaborador" id="colaborador">
+                        <option value="0">Selecione o colaborador</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-md-6">
                     <label for="descricao">Descrição</label>
                     <textarea name="descricao" id="descricao" rows="3" class="form-control"></textarea>
                 </div>
+
             </div>
 
             <div class="row" id="sabtn-right">
-                <button type="submit" id="salvar-sprint" class="btn btn-primary">Salvar</button>
+                <a id="salvar-sprint" class="btn btn-primary">Salvar</a>
             </div>
         </form>
     </div>

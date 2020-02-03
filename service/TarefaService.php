@@ -35,7 +35,7 @@ class TarefaService {
         if(empty($tarefa->getCodigo())) {
             array("titulo" => "É necessário adicionar código da tarefa.");
         }
-
+        
         return TarefaFactory::repository()->save($tarefa, $form['salvarTarefa']);
     }
 }

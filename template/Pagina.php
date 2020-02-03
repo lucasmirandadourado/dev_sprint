@@ -8,12 +8,16 @@ class Pagina {
     public function __construct() {
         require_once('sessao.php');
         array_push($this->js, '../asset/chartjs/canvasjs.min.js');
+        array_push($this->js, '../asset/js/moment.min.js');
         array_push($this->js, '../asset/js/jquery-3.3.1.min.js');
         array_push($this->js, '../asset/js/jquery.dataTables.min.js');
         array_push($this->js, '../asset/js/dataTables.bootstrap4.min.js');
+        array_push($this->js, '../asset/js/select2.min.js');
         array_push($this->js, '../asset/js/page.js');
-    
+
+        
         array_push($this->css, '../asset/css/bootstrap.min.css');     
+        array_push($this->css, '../asset/css/select2.min.css');     
         array_push($this->css, '../asset/css/sprint.css');     
         
     }

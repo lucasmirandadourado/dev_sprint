@@ -12,7 +12,7 @@ class ColaboradorRepository {
     private function __clone() {}
 
     public function findAll() {
-        $sql = "SELECT * FROM colaborador;";
+        $sql = "SELECT * FROM colaborador order by col_nome;";
         $colaboradores = Conexao::fetchAll($sql);        
         $lista = array();
         foreach ($colaboradores as $key => $value) {

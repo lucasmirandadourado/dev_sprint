@@ -64,7 +64,7 @@ class Colaborador implements JsonSerializable {
 
     public function jsonSerialize() {
         return [
-            "id" => $this->senha,
+            "id" => $this->id,
             "nome" => $this->nome,
             "login" => $this->login,
             "funcao" => $this->funcao,
