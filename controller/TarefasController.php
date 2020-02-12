@@ -4,7 +4,7 @@ require_once(dirname(__FILE__).'/../factory/TarefaFactory.php');
 require_once(dirname(__FILE__).'/../factory/ColaboradorFactory.php');
 
 if(isset($_GET['sprint'])) {  
-    $tarefas = TarefaFactory::repository()->findAllBySprint($_GET['sprint']);    
+    $tarefas = TarefaFactory::repository()->findAllBySprint($_GET['sprint']);  
     $colaboradores = ColaboradorFactory::repository()->findAll();
     echo json_encode(array("tarefas" => $tarefas, "colaboradores" => $colaboradores));
     exit;

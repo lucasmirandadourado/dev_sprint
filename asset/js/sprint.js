@@ -64,6 +64,7 @@ $(document).ready(function () {
             window.location = `./cadastrar-tarefas.php?sprint=${sprint}`;
         } else {
             $('#mensagem').html('Selecione o sprint.');
+            $('#mensagem').css('display', 'flex');
         }
     });
 });

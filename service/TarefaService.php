@@ -21,6 +21,12 @@ class TarefaService {
             if($value['name'] == 'descricao') {
                 $tarefa->setDescricao($value['value']);
             }
+            if($value['name'] == 'bug') {
+                $tarefa->setBug($value['value']);
+            }
+            if($value['name'] == 'tarefa_bug') {
+                $tarefa->setBug($value['value']);
+            }
         }
         $mensagem = array();
         if($tarefa->getTitulo() < 3) {

@@ -56,6 +56,11 @@ $pagina->head("Cadastrar Tarefas");
                     </select>
                 </div>
 
+                <div class="form-group col-md-3">
+                    <label for="bug" title="Essa tarefa é para resolver um problema de bug?">Bug</label>
+                    <input type="checkbox" name="bug" id="bug">
+                </div>
+
                 <div class="form-group col-md-6">
                     <label for="descricao">Descrição</label>
                     <textarea name="descricao" id="descricao" rows="3" class="form-control"></textarea>

@@ -1,7 +1,6 @@
 <?php
-// var_dump($_POST);
-require_once('./../repository/SprintRepository.php');
-require_once('./../repository/TarefaRepository.php');
+require_once(dirname(__FILE__).'/../repository/SprintRepository.php');
+require_once(dirname(__FILE__).'/../repository/TarefaRepository.php');
 
 class SprintFactory
 {

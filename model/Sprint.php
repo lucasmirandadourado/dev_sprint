@@ -1,5 +1,5 @@
 <?php 
-require_once('tarefa.php');
+require_once(dirname(__FILE__).'/../model/Tarefa.php');
 
 class Sprint  implements JsonSerializable {
 

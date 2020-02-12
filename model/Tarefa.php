@@ -1,6 +1,6 @@
 <?php 
 
-require_once('colaborador.php');
+require_once(dirname(__FILE__).'/../model/Colaborador.php');
 
 class Tarefa implements JsonSerializable {
 

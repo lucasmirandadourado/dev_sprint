@@ -56,3 +56,8 @@ CREATE TABLE dias_sprint (
 );
 
 1;"Lucas Dourado";"lucas";"6c14da109e294d1e8155be8aa4b1ce8e";TRUE;"desenvolvedor"
+
+
+## tail -f /var/log/httpd/error_log
+## cd /var/www/html/test/
+## /home/vagrant/phpunit autenticacao_teste.php

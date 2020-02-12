@@ -6,7 +6,7 @@ $('button').click(function (e) {
 
     let data = { "login": login, "senha": senha }
 
-    $.post('./controller/loginController.php', data, function (data, status) {
+    $.post('./controller/LoginController.php', data, function (data, status) {
         if (data) {
             console.log(data);
             window.location.href = './view/index.php';

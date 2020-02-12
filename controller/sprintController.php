@@ -5,7 +5,6 @@ require_once('./../service/SprintService.php');
 
 if (isset($_POST['buscarSprint'])) {
     $buscar = SprintFactory::repository()->findAll();
-    
     $select = "<option>Selecione o Sprint</option>";
     foreach($buscar as $item) {
         $select .=  "<option value=".$item->getId().">".$item->getNome()."</option>";

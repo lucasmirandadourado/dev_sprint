@@ -33,8 +33,8 @@ class SprintService
         $sprintDao = SprintFactory::repository()->buscarInfoSprint($id);
 
         $tarefaDao = new TarefaRepository();
-        $tarefas = $tarefaDao->findAll($id);
-
+        $tarefas = $tarefaDao->findAllBySprint($id);
+        var_dump($tarefas);
         $sprint = new Sprint($sprintDao->getNome(), $sprintDao->getDataInicio(), $sprintDao->getDataInicio(), $sprintDao->getQtdCol());
         $sprint->setId($sprintDao->getId());
         foreach ($tarefas as $tarefa) {

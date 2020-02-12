@@ -54,7 +54,7 @@ a {
 }
 
 a:hover {
-    font-size: 18px;
+    font-size: 16px;
     color: white;
     text-decoration: none;
 }
@@ -71,6 +71,7 @@ div#ds_conteudo {
     padding-right: 10%;
     margin-top: 10px;
     flex-wrap: wrap;
+    flex-direction: column;
 }
 
 #selecionarSprint {
@@ -88,6 +89,7 @@ div#ds_conteudo {
 }
 
 #selecionar-sprints {
+    flex: 1;
     word-wrap: normal;
     margin: 9px;
     border: 1px solid var(--roxo);
@@ -158,10 +160,10 @@ hr.sp_divisao {
 
 div#editarSprint {
     display: flex;
-    justify-content: right;
-    align-items: flex-end;
-    flex-direction: column;
+    justify-content: space-between;
+    flex-direction: row;
     margin: 0px 12px;
+    align-items: center;
 }
 
 #editarSprint a.btn {
@@ -213,4 +215,15 @@ span#nome-sprint, span#colaborador-sprint, span#dias-sprint {
     display: flex;
     justify-content: flex-end;
     margin-right: 1px;
+}
+
+div#mensagem {
+    display: none;
+    background-color: #ec9539;
+    padding: 2px 9px;
+    margin: 3px 11px 8px 20px;
+    color: white;
+    border: 1px solid #ec9539;
+    border-radius: 3px;
+    font-size: 0.9rem;
 }

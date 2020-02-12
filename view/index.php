@@ -7,31 +7,15 @@
 
   <div id="ds_conteudo">
     <div id="selecionarSprint">
-      <select name="selecionar-sprints" id="selecionar-sprints"></select>
-      <div id="info">
-        <table class="table">
-          <tbody>
-            <tr>
-              <td>Horas trabalhadas</td>
-              <td id="horas_trabalhadas"></td>
-            </tr>
-            <tr>
-              <td>Quantidade de tarefas</td>
-              <td id="qtd_tarefa"></td>
-            </tr>
-            <tr>
-              <td>Bugs</td>
-              <td id="bugs"></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      
 
       <div id="editarSprint">
+        <select name="selecionar-sprints" id="selecionar-sprints"></select>
         <a href="#" class="btn" id="spt-editarSprint">Editar</a>
       </div>
 
       <div id="mensagem"></div>
+
     </div>
     <div id="grafico">
       <div id="chartContainer" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
