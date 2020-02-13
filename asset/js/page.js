@@ -1,6 +1,6 @@
 $(document).on('click', '#sair', function(e) {
     console.log('OI');
-    $.post('../controller/loginController.php', 'sair', function(data){
+    $.post('../controller/LoginController.php', 'sair', function(data){
         if(data) document.location.reload(true);
     });
 });

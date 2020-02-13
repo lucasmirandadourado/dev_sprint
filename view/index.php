@@ -12,6 +12,7 @@
       <div id="editarSprint">
         <select name="selecionar-sprints" id="selecionar-sprints"></select>
         <a href="#" class="btn" id="spt-editarSprint">Editar</a>
+        <a href="#" class="btn" id="spt-criarSprint">Criar</a>
       </div>
 
       <div id="mensagem"></div>

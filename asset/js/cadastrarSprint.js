@@ -29,7 +29,7 @@ $(document).ready(function (e) {
         }
 
         $.ajax({
-            url: '../controller/sprintController.php',
+            url: '../controller/SprintController.php',
             method: "POST",
             data: data,
             dataType: 'json',

@@ -57,7 +57,10 @@ $pagina->head("Cadastrar Tarefas");
                 </div>
 
                 <div class="form-group col-md-3">
-                    <label for="bug" title="Essa tarefa é para resolver um problema de bug?">Bug</label>
+                    <div>
+                        <label for="bug" title="Essa tarefa é para resolver um problema de bug?">Bug</label>
+                        <img src="../asset/icon/icons8-info.svg" alt="Essa tarefa é para resolver um problema de bug?">
+                    </div>
                     <input type="checkbox" name="bug" id="bug">
                 </div>
 
@@ -65,7 +68,6 @@ $pagina->head("Cadastrar Tarefas");
                     <label for="descricao">Descrição</label>
                     <textarea name="descricao" id="descricao" rows="3" class="form-control"></textarea>
                 </div>
-
             </div>
 
             <div class="row" id="sabtn-right">

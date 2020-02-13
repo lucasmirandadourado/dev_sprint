@@ -52,7 +52,7 @@ $(document).ready(function () {
                 }
 
                 dadosTarefasEntregues(data.tarefas, 10);
-                __onGrafico(dados, tarefas, data.name);
+                // __onGrafico(dados, tarefas, data.name);
             }
         });
     });
@@ -129,7 +129,7 @@ function __onGrafico(data, tarefas, nomeGrafico) {
         animationEnabled: true,
         theme: "light2",
         title:{
-            text: "Sprint 39"
+            text: nomeGrafico
         },
         axisX:{
             valueFormatString: "DD MMM",
