@@ -66,15 +66,17 @@ a:hover {
     display: flex;
     flex-direction: column;
     height: 100vh;
+    justify-content: space-between;
 }
 
 div#ds_conteudo {
     display: flex;
-    padding-left: 10%;
-    padding-right: 10%;
-    margin-top: 10px;
     flex-wrap: wrap;
     flex-direction: column;
+    margin: 0 auto;
+    width: calc(100% - 20%);
+    height: 100%;
+    margin-top: 6px;
 }
 
 #selecionarSprint {

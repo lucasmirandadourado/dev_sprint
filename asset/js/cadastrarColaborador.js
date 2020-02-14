@@ -1,6 +1,10 @@
 $(document).ready(function () {
     let colaborador = new Colaborador();
     colaborador.__getColaboradores();
+
+    $(document).on('click', '#btn-addColaborador', function () {
+        $('#myModal').modal('show');
+    });
 });
 
 class Colaborador {
@@ -26,7 +30,7 @@ class Colaborador {
                     { "title": "nome" },
                     { "title": "cargo" },
                     { "title": "Status" },
-                    { "title": "acao" }
+                    { "title": "" }
                 ], 
                 "language": {
                     "lengthMenu": "Apresentar _MENU_ itens por página",
@@ -38,5 +42,9 @@ class Colaborador {
             });
 
         }, "json");
+    }
+
+    __addColaborador(){
+
     }
 }

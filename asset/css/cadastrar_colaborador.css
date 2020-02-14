@@ -1,3 +1,16 @@
 .edit, .delete {
     cursor: pointer;
 }
+
+#addColaborador a.btn {
+    float: right;
+    background-color: var(--verde);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#addColaborador a.btn:hover {
+    background-color: #027368db;
+    color: white;
+}

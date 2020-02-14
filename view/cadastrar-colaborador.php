@@ -11,7 +11,11 @@ $pagina->head("Cadastrar Colaborador");
 
     <h1 class="sp_titulo">Colaborador</h1>
     <hr class="sp_divisao" />
+    <div id="addColaborador">
+        <a class="btn" id="btn-addColaborador">Cadastrar Colaborador</a>
+    </div>
 
+    <hr />
     <table id="tabela-colaboradores" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
@@ -26,10 +30,29 @@ $pagina->head("Cadastrar Colaborador");
         <tbody></tbody>
     </table>
 
+    <br>
+
+    <div class="modal" id="myModal" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Modal body text goes here.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
-
-<br>
-
 <?php
 $pagina->addJS('../asset/js/cadastrarColaborador.js');
 $pagina->footer();
