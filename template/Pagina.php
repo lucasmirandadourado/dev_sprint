@@ -30,7 +30,7 @@ class Pagina {
                 <meta charset='UTF-8'>
                 <meta name='viewport' content='width=device-width, initial-scale=1.0'>
                 <meta http-equiv='X-UA-Compatible' content='ie=edge'>
-                <title>Dev Sprint - $nomeSprint</title>
+                <title>$nomeSprint</title>
                 
                 <link rel='shortcut icon' type='image/x-icon' href='../asset/img/icon.ico'/>";
         
@@ -44,9 +44,10 @@ class Pagina {
         <div id="menu">
             <a href="./"><img src="../asset/img/scrum-head.png" class="logo" alt="Dev Sprint"></a>
             <div id="menu-itens">
-            <a href="../view/cadastrar-sprint.php" id="sprints">SPRINT</a>
-            <a href="#" id="tarefas">TAREFAS</a>
-            <a href="#" id="sair">SAIR</a>
+                <a href="../view/cadastrar-colaborador.php" id="colaborador">COLABORADOR</a>
+                <a href="../view/cadastrar-sprint.php" id="sprints">SPRINT</a>
+                <a href="#" id="tarefas">TAREFAS</a>
+                <a href="#" id="sair">SAIR</a>
             </div>
         </div>
         ';

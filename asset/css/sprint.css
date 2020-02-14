@@ -39,7 +39,10 @@ body {
 div#menu-itens {
     display: flex;
     justify-content: space-around;
-    width: 270px;
+}
+
+div#menu-itens a {
+    padding: 0 10px;
 }
 
 a {
@@ -242,4 +245,14 @@ div#mensagem {
     border: 1px solid #ec9539;
     border-radius: 3px;
     font-size: 0.9rem;
+}
+
+.delete:hover {
+    background-color: #ff000029;
+    border-radius: 3px;
+}
+
+.edit:hover {
+    background-color: #3bda3b4a;;
+    border-radius: 3px;
 }

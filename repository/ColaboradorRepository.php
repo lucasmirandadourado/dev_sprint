@@ -23,6 +23,7 @@ class ColaboradorRepository {
             $colaborador->setFuncao($value->col_funcao);
             $colaborador->setLogin($value->col_login);
             $colaborador->setStatus($value->col_status);
+            $colaborador->setSenha(null);
             array_push($lista, $colaborador);
         }
         return $lista;

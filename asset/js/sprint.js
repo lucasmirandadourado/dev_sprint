@@ -1,21 +1,6 @@
 $(document).ready(function () {
     $('#sprint').DataTable();
     __onFindSprint();
-    let tarefas = [];
-          let data =  [
-            { x: new Date(2020, 0, 3), y: 35 },
-            { x: new Date(2020, 0, 4), y: 32 },
-            { x: new Date(2020, 0, 5), y: 28 },
-            { x: new Date(2020, 0, 6), y: 25 },
-            { x: new Date(2020, 0, 7), y: 21 },
-            { x: new Date(2020, 0, 8), y: 18 },
-            { x: new Date(2020, 0, 9), y: 14 },
-            { x: new Date(2020, 0, 10), y: 11 },
-            { x: new Date(2020, 0, 11), y: 7 },
-            { x: new Date(2020, 0, 12), y: 4 },
-            { x: new Date(2020, 0, 13), y: 0 }
-        ];
-    __onGrafico(data, tarefas, "Teste");
     
     $(document).on('change', '#selecionar-sprints', function(e){
         let id = $(this).find(':selected').data('id')
