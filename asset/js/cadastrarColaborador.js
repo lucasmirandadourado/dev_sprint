@@ -5,6 +5,12 @@ $(document).ready(function () {
     $(document).on('click', '#btn-addColaborador', function () {
         $('#myModal').modal('show');
     });
+
+    $(document).on('click', '#spt-salvar-colaborador', function (e) {
+        e.preventDefault();
+        let form = $('#cadastrarColaborador').serializeArray();
+        colaborador.__addColaborador(form);
+    });
 });
 
 class Colaborador {
@@ -26,9 +32,9 @@ class Colaborador {
             $('#tabela-colaboradores').DataTable({
                 "data": data,
                 "columns": [
-                    { "title": "id" },
-                    { "title": "nome" },
-                    { "title": "cargo" },
+                    { "title": "Código" },
+                    { "title": "Nome" },
+                    { "title": "Cargo" },
                     { "title": "Status" },
                     { "title": "" }
                 ], 
@@ -44,7 +50,9 @@ class Colaborador {
         }, "json");
     }
 
-    __addColaborador(){
-
+    __addColaborador(form){
+        $.post('../controller/ColaboradorController.php', {"cadastrarColaborador": form}, function(result){
+            console.log('Result', result);
+        }, "json");
     }
 }

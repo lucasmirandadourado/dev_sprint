@@ -30,7 +30,8 @@ class ColaboradorRepository {
     }
 
     public function find($login, $senha) {
-        $sql = "select * from colaborador where col_login = '$login' and col_senha = md5('$senha'||col_id)";
+        $sql = "select * from colaborador where col_login = '$login' 
+            and col_senha = md5('$senha'||'d8ir0uQfFnloK7jt&nc!#5')";
         $dao = Conexao::getConexao()->fetch($sql);                    
         $colaborador = new Colaborador($dao[0]->col_nome, $dao[0]->col_senha);
         $colaborador->setId($dao[0]->col_id);
@@ -45,7 +46,17 @@ class ColaboradorRepository {
         $sql = "INSERT INTO colaborador(col_nome) VALUES ('$nome') returning col_id;";
         return Postgre::query($sql);
     }
-    
+
+    public function save($colaborador) {
+        echo $sql = "INSERT INTO colaborador(col_nome, col_login, col_senha, col_status, col_funcao) 
+            VALUES ('". $colaborador->getNome() ."',
+            '".$colaborador->getLogin()."',
+            '".$colaborador->getSenha()."',
+            'true',
+            '".$colaborador->getFuncao()."') returning col_id;";
+        // return Postgre::query($sql);
+    }
+     
 }
 
 ?>

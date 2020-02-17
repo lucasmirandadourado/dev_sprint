@@ -19,7 +19,7 @@ class SprintFactory
         return self::$sprintRepository;
     }
 
-    public static function serice() {
+    public static function service() {
         if(self::$sprintService === null) {
             self::$sprintService = new SprintService();
         }

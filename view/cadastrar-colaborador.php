@@ -36,17 +36,39 @@ $pagina->head("Cadastrar Colaborador");
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Modal title</h5>
+                    <h5 class="modal-title">Cadastrar Colaborador</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Modal body text goes here.</p>
+                    <form id="cadastrarColaborador" method="POST">
+                        
+                        <div class="form-group">
+                            <label for="nome">Nome</label>
+                            <input type="text" name="nome" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cargo">Cargo</label>
+                            <input type="text" name="cargo" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="login">Login</label>
+                            <input type="text" name="login" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Senha</label>
+                            <input type="password" name="password" class="form-control">
+                        </div>
+
+                    </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <a href="" id="spt-salvar-colaborador" class="btn btn-primary">Salvar</a>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fecha</button>
                 </div>
             </div>
         </div>

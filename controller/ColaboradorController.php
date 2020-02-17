@@ -7,3 +7,9 @@ if(isset($_POST['buscarTodosColaboradores'])) {
     echo json_encode($colaboradores);
     exit;
 }
+
+if(isset($_POST['cadastrarColaborador'])) {
+    $colaborador = ColaboradorFactory::service()->cadastrarColaborador($_POST);
+    echo json_encode($colaborador);
+    exit;
+}

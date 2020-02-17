@@ -51,7 +51,7 @@ class Colaborador implements JsonSerializable {
     }
 
     public function setSenha($senha) {
-        $this->senha = $senha;
+        $this->senha = md5($senha.'d8ir0uQfFnloK7jt&nc!#5');
     }
 
     public function getStatus() {

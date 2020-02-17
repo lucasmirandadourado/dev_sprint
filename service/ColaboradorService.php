@@ -30,4 +30,15 @@ class ColaboradorService {
         session_unset();
         return true;
     }
+
+    public static function cadastrarColaborador($form) {
+        $formulario = array();
+        foreach ($form["cadastrarColaborador"] as $key => $value) {
+            $formulario[$value['name']] = trim($value['value']);
+        }
+        $colaborador = new Colaborador($formulario['nome'], $formulario['password']);
+        $colaborador->setFuncao($formulario['cargo']);
+        $colaborador->setLogin($formulario['login']);
+        return ColaboradorFactory::repository()->save($colaborador);
+    }
 }
