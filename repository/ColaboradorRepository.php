@@ -44,7 +44,7 @@ class ColaboradorRepository {
 
     public function criarColaborador($nome) {
         $sql = "INSERT INTO colaborador(col_nome) VALUES ('$nome') returning col_id;";
-        return Postgre::query($sql);
+        return Conexao::getConexao()->query($sql);
     }
 
     public function save($colaborador) {
@@ -54,9 +54,15 @@ class ColaboradorRepository {
             md5('".$colaborador->getSenha()."'||'d8ir0uQfFnloK7jt&nc!#5'),
             'true',
             '".$colaborador->getFuncao()."') returning col_id;";
-        return Postgre::fetch($sql);
+        return Conexao::getConexao()->fetch($sql);
     }
      
+    public function delete($id) {
+        if($id > 0) {
+            $sql = "DELETE FROM colaborador where col_id = $id";
+            return Conexao::getConexao()->query($sql);
+        } else return false;
+    }
 }
 
 ?>

@@ -41,4 +41,11 @@ class ColaboradorService {
         $colaborador->setLogin($formulario['login']);
         return ColaboradorFactory::repository()->save($colaborador);
     }
+
+    public static function delete($id) {
+        settype($id, 'integer');
+        if($id > 0) {
+            return ColaboradorFactory::repository()->delete($id);
+        } else return false;
+    }
 }
