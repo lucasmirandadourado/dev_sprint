@@ -14,3 +14,7 @@
     background-color: #027368db;
     color: white;
 }
+
+div#addColaborador, div#tabela-colaboradores_wrapper {
+    width: 100%;
+}

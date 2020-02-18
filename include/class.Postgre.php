@@ -54,8 +54,7 @@ class Postgre extends Bd
         return $this->connection;
     }
 
-    public function query($sql = null)
-    {
+    public function query($sql = null) {
         $stmt = $this->connection->prepare($sql);
         return $stmt->execute();
     }

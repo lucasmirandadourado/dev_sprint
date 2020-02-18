@@ -15,7 +15,7 @@ $pagina->head("Cadastrar Colaborador");
         <a class="btn" id="btn-addColaborador">Cadastrar Colaborador</a>
     </div>
 
-    <hr />
+    <br>
     <table id="tabela-colaboradores" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>

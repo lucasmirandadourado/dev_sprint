@@ -48,13 +48,13 @@ class ColaboradorRepository {
     }
 
     public function save($colaborador) {
-        echo $sql = "INSERT INTO colaborador(col_nome, col_login, col_senha, col_status, col_funcao) 
+        $sql = "INSERT INTO colaborador(col_nome, col_login, col_senha, col_status, col_funcao) 
             VALUES ('". $colaborador->getNome() ."',
             '".$colaborador->getLogin()."',
-            '".$colaborador->getSenha()."',
+            md5('".$colaborador->getSenha()."'||'d8ir0uQfFnloK7jt&nc!#5'),
             'true',
             '".$colaborador->getFuncao()."') returning col_id;";
-        // return Postgre::query($sql);
+        return Postgre::fetch($sql);
     }
      
 }
