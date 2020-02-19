@@ -42,7 +42,7 @@ $pagina->head("Cadastrar Colaborador");
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div id="mensagem"></div>
+                    <div id="cadastrar_mensagem"></div>
                     <form id="cadastrarColaborador" method="POST">
                         
                         <div class="form-group">

@@ -8,6 +8,7 @@ $(document).ready(function () {
 
     $(document).on('click', '#spt-salvar-colaborador', function (e) {
         e.preventDefault();
+        $('#spt-salvar-colaborador').hide();
         let form = $('#cadastrarColaborador').serializeArray();
         colaborador.addColaborador(form);
     });
@@ -65,9 +66,9 @@ class Colaborador {
     }
 
     addColaborador(form){
-        $.post('../controller/ColaboradorController.php', {"cadastrarColaborador": form}, function(result){
+        let request = $.post('../controller/ColaboradorController.php', {"cadastrarColaborador": form}, function(result){
             if(result[0].col_id > 0) {
-                $('#mensagem').html('Colaborador criado com sucesso.');
+                $('#cadastrar_mensagem').html(`<div class="alert alert-success" role="alert">Colaborador criado com sucesso.</div>`);
                 setTimeout(function() {
                     let tabela = $('#tabela-colaboradores').DataTable();
                     tabela.row.add([
@@ -79,15 +80,31 @@ class Colaborador {
                         <img class="delete" src="https://img.icons8.com/material-outlined/24/000000/add-trash.png" />`
                     ]);
                     
-                    $('#mensagem').html('');
+                    $('#cadastrar_mensagem').html('');
                     $('#modalCadastrarColaborador').modal('hide');
                     window.location.reload(true);
+                }, 2000);
+            } else {
+                $('#cadastrar_mensagem').html(`<div class="alert alert-success" role="alert">Colaborador criado com sucesso.</div>`);
+                setTimeout(function(e) {
+                    $('#cadastrar_mensagem').html('');
+                    $('#spt-salvar-colaborador').show();
+                    $('#modalCadastrarColaborador').modal('hide');
                 }, 1500);
             }
         }, "json");
+
+        request.fail(function(e){
+            $('#cadastrar_mensagem').html(`<div class="alert alert-success" role="alert">Colaborador criado com sucesso.</div>`);
+            setTimeout(function() {
+                $('#cadastrar_mensagem').html('');
+                $('#modalCadastrarColaborador').modal('hide');
+            });
+        });
     }
 
     remove(id) {
+        $('#mensagem_confirmar_remocao').html(`<div class="alert alert-success" role="alert">Colaborador excluído.</div>`);
         $.ajax({
             url: '../controller/ColaboradorController.php',
             type: 'DELETE',
@@ -96,6 +113,7 @@ class Colaborador {
                 
                 setTimeout(function() {
                     $('#mensagem').html('');
+                    $('#mensagem_confirmar_remocao').html('');
                     window.location.reload(true);
                 }, 1000);
             }
