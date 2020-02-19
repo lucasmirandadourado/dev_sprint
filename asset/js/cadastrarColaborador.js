@@ -26,6 +26,14 @@ $(document).ready(function () {
         let id = $('#id').val();
         colaborador.remove(id);
     });
+
+    $(document).on('click', '.edit', function(e){
+        e.preventDefault();
+        $('#modalEditarColaborador').modal('show');
+        let id = $(this).data('id');
+        console.log(id);
+        colaborador.buscarColaborador(id);
+    });
 });
 
 class Colaborador {
@@ -118,5 +126,16 @@ class Colaborador {
                 }, 1000);
             }
         });
+    }
+
+    buscarColaborador(id) {
+        $.get('../controller/ColaboradorController.php', {"buscarColaborador": id}, function(result){
+            console.log(result)
+            // TODO: Buscar o colaborador e apresentar no modal. 
+        });
+    }
+
+    editarColaborador(form) {
+        // TODO: Editar o colaborador
     }
 }

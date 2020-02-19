@@ -18,3 +18,7 @@
 div#addColaborador, div#tabela-colaboradores_wrapper {
     width: 100%;
 }
+
+.left {
+    float: left;
+}

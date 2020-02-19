@@ -33,7 +33,7 @@ $pagina->head("Cadastrar Colaborador");
     <br>
 
     <div class="modal" id="modalCadastrarColaborador" role="dialog">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Cadastrar Colaborador</h5>
@@ -47,22 +47,22 @@ $pagina->head("Cadastrar Colaborador");
                         
                         <div class="form-group">
                             <label for="nome">Nome</label>
-                            <input type="text" name="nome" class="form-control">
+                            <input type="text" name="nome" class="form-control" required>
                         </div>
 
                         <div class="form-group">
                             <label for="cargo">Cargo</label>
-                            <input type="text" name="cargo" class="form-control">
+                            <input type="text" name="cargo" class="form-control"  required>
                         </div>
 
                         <div class="form-group">
                             <label for="login">Login</label>
-                            <input type="text" name="login" class="form-control">
+                            <input type="text" name="login" class="form-control" required>
                         </div>
 
                         <div class="form-group">
                             <label for="password">Senha</label>
-                            <input type="password" name="password" class="form-control">
+                            <input type="password" name="password" class="form-control" required>
                         </div>
 
                     </form>
@@ -98,6 +98,51 @@ $pagina->head("Cadastrar Colaborador");
         </div>
     </div>
 
+
+    <div class="modal" id="modalEditarColaborador" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Editar Colaborador</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="mensagem_editar_colaborador"></div>
+                                    
+                    <div class="form-group">
+                        <label for="id">Código</label>
+                        <input type="text" class="form-control col-md-6" name="id" id="id">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nome">Nome</label>
+                        <input type="text" name="nome" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cargo">Cargo</label>
+                        <input type="text" name="cargo" class="form-control">
+                    </div>
+
+                    <div class="form-group col-md-6 left">
+                        <label for="login">Login</label>
+                        <input type="text" name="newlogin" class="form-control" required>
+                    </div>
+
+                    <div class="form-group col-md-6 left">
+                        <label for="password">Senha</label>
+                        <input type="password" name="newpassword" class="form-control" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="" id="spt-deletar-colaborador" class="btn btn-primary">Sim</a>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fecha</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <?php
 $pagina->addJS('../asset/js/cadastrarColaborador.js');
