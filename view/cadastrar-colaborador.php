@@ -32,7 +32,7 @@ $pagina->head("Cadastrar Colaborador");
 
     <br>
 
-    <div class="modal" id="myModal" role="dialog">
+    <div class="modal" id="modalCadastrarColaborador" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -69,6 +69,29 @@ $pagina->head("Cadastrar Colaborador");
                 </div>
                 <div class="modal-footer">
                     <a href="" id="spt-salvar-colaborador" class="btn btn-primary">Salvar</a>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fecha</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal" id="modalDeletarColaborador" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Deletar Colaborador</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="mensagem_confirmar_remocao"></div>
+                    Têm certeza que deseja remover esse colaborador?
+                    <input type="hidden" id="id" name="id">                    
+                </div>
+                <div class="modal-footer">
+                    <a href="" id="spt-deletar-colaborador" class="btn btn-primary">Sim</a>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fecha</button>
                 </div>
             </div>

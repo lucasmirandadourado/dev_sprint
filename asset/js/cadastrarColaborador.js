@@ -1,28 +1,35 @@
 $(document).ready(function () {
     let colaborador = new Colaborador();
-    colaborador.__getColaboradores();
+    colaborador.getColaboradores();
 
     $(document).on('click', '#btn-addColaborador', function () {
-        $('#myModal').modal('show');
+        $('#modalCadastrarColaborador').modal('show');
     });
 
     $(document).on('click', '#spt-salvar-colaborador', function (e) {
         e.preventDefault();
         let form = $('#cadastrarColaborador').serializeArray();
-        colaborador.__addColaborador(form);
+        colaborador.addColaborador(form);
     });
 
     $(document).on('click', '.delete', function(e) {
-        e.preventDefault();
         let id = $(this).data('id');
         let row = $(this).closest();
-        colaborador.__remove(id, row);
+        console.log(id, row);
+        $('#id').val(id);
+        $('#modalDeletarColaborador').modal('show');
+    });
+
+    $(document).on('click', '#spt-deletar-colaborador', function(e) {
+        e.preventDefault();
+        let id = $('#id').val();
+        colaborador.remove(id);
     });
 });
 
 class Colaborador {
 
-    __getColaboradores() {
+    getColaboradores() {
         $.post('../controller/ColaboradorController.php', "buscarTodosColaboradores", function (result) {
             let data = Array();
             $(result).each(function (index, value) {
@@ -57,12 +64,11 @@ class Colaborador {
         }, "json");
     }
 
-    __addColaborador(form){
+    addColaborador(form){
         $.post('../controller/ColaboradorController.php', {"cadastrarColaborador": form}, function(result){
             if(result[0].col_id > 0) {
                 $('#mensagem').html('Colaborador criado com sucesso.');
                 setTimeout(function() {
-                    $('#mensagem').html('');
                     let tabela = $('#tabela-colaboradores').DataTable();
                     tabela.row.add([
                         result[0].col_id,
@@ -72,13 +78,16 @@ class Colaborador {
                         `<img class="edit" src="https://img.icons8.com/material-outlined/24/000000/pencil-tip.png" />
                         <img class="delete" src="https://img.icons8.com/material-outlined/24/000000/add-trash.png" />`
                     ]);
-                    $('#myModal').modal('hide');
-                }, 2500);
+                    
+                    $('#mensagem').html('');
+                    $('#modalCadastrarColaborador').modal('hide');
+                    window.location.reload(true);
+                }, 1500);
             }
         }, "json");
     }
 
-    __remove(id, row) {
+    remove(id) {
         $.ajax({
             url: '../controller/ColaboradorController.php',
             type: 'DELETE',
@@ -87,9 +96,8 @@ class Colaborador {
                 
                 setTimeout(function() {
                     $('#mensagem').html('');
-                    let tabela = $('#tabela-colaboradores').DataTable();
-                    tabela.row.remove(row);
-                }, 2500);
+                    window.location.reload(true);
+                }, 1000);
             }
         });
     }
