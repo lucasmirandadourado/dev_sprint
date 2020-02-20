@@ -35,3 +35,9 @@ if(isset($_GET['buscarColaborador'])) {
     echo json_encode($colaborador, JSON_OBJECT_AS_ARRAY);
     exit;
 }
+
+if(isset($_PUT['atualizarColaborador'])) {
+    $colaborador = ColaboradorFactory::service()->atualizar($_PUT['atualizarColaborador']);
+    echo json_encode($colaborador);
+    exit;
+}

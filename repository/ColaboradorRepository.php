@@ -47,7 +47,7 @@ class ColaboradorRepository {
         return Conexao::getConexao()->query($sql);
     }
 
-    public function save($colaborador) {
+    public function save(Colaborador $colaborador) {
         $sql = "INSERT INTO colaborador(col_nome, col_login, col_senha, col_status, col_funcao) 
             VALUES ('". $colaborador->getNome() ."',
             '".$colaborador->getLogin()."',
@@ -74,6 +74,27 @@ class ColaboradorRepository {
         $colaborador->setStatus($col->col_status);
         $colaborador->setFuncao($col->col_funcao);
         return $colaborador;
+    }
+
+    public function update(Colaborador $colaborador) {
+        
+        $array = array();
+        if($colaborador->getNome() != '') {
+            array_push($array, "col_nome = '".$colaborador->getNome()."'");
+        } 
+        if($colaborador->getLogin() != '') {
+            array_push($array, "col_login = '".$colaborador->getLogin()."'");
+        }
+        if($colaborador->getFuncao() != '') {
+            array_push($array, "col_funcao = '".$colaborador->getFuncao()."'");
+        }
+        if($colaborador->getSenha() != '') {
+            array_push($array, "col_senha = '".$colaborador->getSenha()."'");
+        }
+        $up = implode(', ', $array);
+
+        $sql = "UPDATE colaborador SET $up WHERE col_id = " . $colaborador->getId();
+        return  Conexao::getConexao()->query($sql);
     }
 }
 

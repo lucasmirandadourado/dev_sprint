@@ -33,6 +33,12 @@ $(document).ready(function () {
         let id = $(this).data('id');
         colaborador.buscarColaborador(id);
     });
+
+    $(document).on('click', '#spt-editar-colaborador', function (e) { 
+        e.preventDefault();
+        let form = $('#editarColaborador').serializeArray();
+        colaborador.editarColaborador(form);
+    });
 });
 
 class Colaborador {
@@ -138,11 +144,23 @@ class Colaborador {
             $('#new_id').val(result.id);
             $('#new_nome').val(result.nome);
             $('#new_cargo').val(result.funcao);
+            $('#new_login').val(result.login);
             // $('#status').val(result.status);
         });
     }
 
     editarColaborador(form) {
         // TODO: Editar o colaborador
+        $.ajax({
+            url: '../controller/ColaboradorController.php',
+            type: 'PUT',
+            data: {"atualizarColaborador": form},
+            success: function(data) {
+                console.log(data);
+                if(data) {
+                    window.location.reload();
+                }
+            }
+        });
     }
 }

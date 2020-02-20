@@ -44,7 +44,7 @@ $pagina->head("Cadastrar Colaborador");
                 <div class="modal-body">
                     <div id="cadastrar_mensagem"></div>
                     <form id="cadastrarColaborador" method="POST">
-                        
+
                         <div class="form-group">
                             <label for="nome">Nome</label>
                             <input type="text" name="nome" class="form-control" required>
@@ -52,7 +52,7 @@ $pagina->head("Cadastrar Colaborador");
 
                         <div class="form-group">
                             <label for="cargo">Cargo</label>
-                            <input type="text" name="cargo" class="form-control"  required>
+                            <input type="text" name="cargo" class="form-control" required>
                         </div>
 
                         <div class="form-group">
@@ -88,7 +88,7 @@ $pagina->head("Cadastrar Colaborador");
                 <div class="modal-body">
                     <div id="mensagem_confirmar_remocao"></div>
                     Têm certeza que deseja remover esse colaborador?
-                    <input type="hidden" id="id" name="id">                    
+                    <input type="hidden" id="id" name="id">
                 </div>
                 <div class="modal-footer">
                     <a href="" id="spt-deletar-colaborador" class="btn btn-primary">Sim</a>
@@ -110,34 +110,35 @@ $pagina->head("Cadastrar Colaborador");
                 </div>
                 <div class="modal-body">
                     <div id="mensagem_editar_colaborador"></div>
-                                    
-                    <div class="form-group">
-                        <label for="new_id">Código</label>
-                        <input type="text" class="form-control col-md-6" name="id" id="new_id">
-                    </div>
+                    <form id="editarColaborador" method="post">
+                        <div class="form-group">
+                            <label for="new_id">Código</label>
+                            <input type="text" class="form-control col-md-6" name="id" id="new_id">
+                        </div>
 
-                    <div class="form-group">
-                        <label for="new_nome">Nome</label>
-                        <input type="text" name="nome" id="new_nome" class="form-control">
-                    </div>
+                        <div class="form-group">
+                            <label for="new_nome">Nome</label>
+                            <input type="text" name="nome" id="new_nome" class="form-control">
+                        </div>
 
-                    <div class="form-group">
-                        <label for="new_cargo">Cargo</label>
-                        <input type="text" name="cargo" id="new_cargo" class="form-control">
-                    </div>
+                        <div class="form-group">
+                            <label for="new_cargo">Cargo</label>
+                            <input type="text" name="cargo" id="new_cargo" class="form-control">
+                        </div>
 
-                    <div class="form-group col-md-6 left">
-                        <label for="new_login">Login</label>
-                        <input type="text" name="newlogin" id="new_login" class="form-control" required>
-                    </div>
+                        <div class="form-group col-md-6 left">
+                            <label for="new_login">Login</label>
+                            <input type="text" name="newlogin" id="new_login" class="form-control" required>
+                        </div>
 
-                    <div class="form-group col-md-6 left">
-                        <label for="new_password">Senha</label>
-                        <input type="password" name="newpassword" id="new_password" class="form-control" required>
-                    </div>
+                        <div class="form-group col-md-6 left">
+                            <label for="new_password">Senha</label>
+                            <input type="password" name="newpassword" id="new_password" class="form-control" required>
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
-                    <a href="" id="spt-deletar-colaborador" class="btn btn-primary">Sim</a>
+                    <a href="" id="spt-editar-colaborador" class="btn btn-primary">Sim</a>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fecha</button>
                 </div>
             </div>

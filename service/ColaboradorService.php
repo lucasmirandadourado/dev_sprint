@@ -1,6 +1,7 @@
 <?php 
 require_once(dirname(__FILE__).'/../Exception/SprintException.php');
 require_once(dirname(__FILE__).'/../model/Colaborador.php');
+require_once(dirname(__FILE__).'/../util/uteis.php');
 session_start();
 
 class ColaboradorService {
@@ -32,10 +33,9 @@ class ColaboradorService {
     }
 
     public static function cadastrarColaborador($form) {
-        $formulario = array();
-        foreach ($form["cadastrarColaborador"] as $key => $value) {
-            $formulario[$value['name']] = trim($value['value']);
-        }
+        
+        $formulario = converterFormEmArray($form['cadastrarColaborador']);
+
         $colaborador = new Colaborador($formulario['nome'], $formulario['password']);
         $colaborador->setFuncao($formulario['cargo']);
         $colaborador->setLogin($formulario['login']);
@@ -46,6 +46,18 @@ class ColaboradorService {
         settype($id, 'integer');
         if($id > 0) {
             return ColaboradorFactory::repository()->delete($id);
+        } else return false;
+    }
+
+    public static function atualizar($form) {
+        $formulario = converterFormEmArray($form);
+        if($formulario['id'] > 0) {
+            $colaborador = new Colaborador($formulario['nome'], '');
+            $colaborador->setId($formulario['id']);
+            $colaborador->setFuncao($formulario['cargo']);
+            $colaborador->setLogin($formulario['newlogin']);
+            $colaborador->setSenha($formulario['newpassword']);
+            return ColaboradorFactory::repository()->update($colaborador);
         } else return false;
     }
 }

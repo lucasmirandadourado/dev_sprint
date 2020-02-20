@@ -11,7 +11,7 @@ class Colaborador implements JsonSerializable {
 
     public function __construct($nome, $senha) {
         $this->nome = $nome;
-        $this->senha = $senha;
+        $this->setSenha($senha);
     }
 
     public function getId() {
@@ -51,7 +51,7 @@ class Colaborador implements JsonSerializable {
     }
 
     public function setSenha($senha) {
-        $this->senha = md5($senha.'d8ir0uQfFnloK7jt&nc!#5');
+        $this->senha = md5("${senha}d8ir0uQfFnloK7jt&nc!#5");
     }
 
     public function getStatus() {
