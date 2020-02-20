@@ -22,3 +22,7 @@ div#addColaborador, div#tabela-colaboradores_wrapper {
 .left {
     float: left;
 }
+
+#tabela-colaboradores_filter form {
+    float: right;
+}

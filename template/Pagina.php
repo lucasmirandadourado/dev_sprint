@@ -7,8 +7,8 @@ class Pagina {
 
     public function __construct() {
         require_once('sessao.php');
-        array_push($this->js, '../asset/chartjs/canvasjs.min.js');
-        array_push($this->js, '../asset/js/moment.min.js');
+        // array_push($this->js, '../asset/chartjs/canvasjs.min.js');
+        // array_push($this->js, '../asset/js/moment.min.js');
         array_push($this->js, '../asset/js/jquery-3.3.1.min.js');
         array_push($this->js, '../asset/js/bootstrap.min.js');
         array_push($this->js, '../asset/js/jquery.dataTables.min.js');

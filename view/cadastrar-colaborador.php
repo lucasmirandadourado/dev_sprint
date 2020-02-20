@@ -112,28 +112,28 @@ $pagina->head("Cadastrar Colaborador");
                     <div id="mensagem_editar_colaborador"></div>
                                     
                     <div class="form-group">
-                        <label for="id">Código</label>
-                        <input type="text" class="form-control col-md-6" name="id" id="id">
+                        <label for="new_id">Código</label>
+                        <input type="text" class="form-control col-md-6" name="id" id="new_id">
                     </div>
 
                     <div class="form-group">
-                        <label for="nome">Nome</label>
-                        <input type="text" name="nome" class="form-control">
+                        <label for="new_nome">Nome</label>
+                        <input type="text" name="nome" id="new_nome" class="form-control">
                     </div>
 
                     <div class="form-group">
-                        <label for="cargo">Cargo</label>
-                        <input type="text" name="cargo" class="form-control">
+                        <label for="new_cargo">Cargo</label>
+                        <input type="text" name="cargo" id="new_cargo" class="form-control">
                     </div>
 
                     <div class="form-group col-md-6 left">
-                        <label for="login">Login</label>
-                        <input type="text" name="newlogin" class="form-control" required>
+                        <label for="new_login">Login</label>
+                        <input type="text" name="newlogin" id="new_login" class="form-control" required>
                     </div>
 
                     <div class="form-group col-md-6 left">
-                        <label for="password">Senha</label>
-                        <input type="password" name="newpassword" class="form-control" required>
+                        <label for="new_password">Senha</label>
+                        <input type="password" name="newpassword" id="new_password" class="form-control" required>
                     </div>
                 </div>
                 <div class="modal-footer">

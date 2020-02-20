@@ -1,6 +1,7 @@
 $(document).ready(function () {
     let colaborador = new Colaborador();
     colaborador.getColaboradores();
+    // $('div#tabela-colaboradores_filter > label > input').attr('autocomplete', 'off');
 
     $(document).on('click', '#btn-addColaborador', function () {
         $('#modalCadastrarColaborador').modal('show');
@@ -16,7 +17,6 @@ $(document).ready(function () {
     $(document).on('click', '.delete', function(e) {
         let id = $(this).data('id');
         let row = $(this).closest();
-        console.log(id, row);
         $('#id').val(id);
         $('#modalDeletarColaborador').modal('show');
     });
@@ -31,7 +31,6 @@ $(document).ready(function () {
         e.preventDefault();
         $('#modalEditarColaborador').modal('show');
         let id = $(this).data('id');
-        console.log(id);
         colaborador.buscarColaborador(id);
     });
 });
@@ -47,13 +46,18 @@ class Colaborador {
                     value.nome,
                     value.funcao,
                     value.status == true ? 'Ativo' : 'Inativo',
-                    `<img data-id="${value.id}" class="edit" src="https://img.icons8.com/material-outlined/24/000000/pencil-tip.png" />
-                    <img data-id="${value.id}" class="delete" src="https://img.icons8.com/material-outlined/24/000000/add-trash.png" />`
+                    `<img data-id="${value.id}" alt="Editar colaborador" class="edit" src="https://img.icons8.com/material-outlined/24/000000/pencil-tip.png" />
+                    <img data-id="${value.id}" alt="Deletar colaborador" class="delete" src="https://img.icons8.com/material-outlined/24/000000/add-trash.png" />`
                 ]);
             })
 
             $('#tabela-colaboradores').DataTable({
                 "data": data,
+                initComplete: function() {
+                    $(this.api().table().container()).
+                    find('input').parent().wrap('<form>').parent()
+                    .attr('autocomplete', 'off');
+                },
                 "columns": [
                     { "title": "Código" },
                     { "title": "Nome" },
@@ -130,8 +134,11 @@ class Colaborador {
 
     buscarColaborador(id) {
         $.get('../controller/ColaboradorController.php', {"buscarColaborador": id}, function(result){
-            console.log(result)
-            // TODO: Buscar o colaborador e apresentar no modal. 
+            result = JSON.parse(result); 
+            $('#new_id').val(result.id);
+            $('#new_nome').val(result.nome);
+            $('#new_cargo').val(result.funcao);
+            // $('#status').val(result.status);
         });
     }
 

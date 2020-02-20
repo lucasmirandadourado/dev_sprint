@@ -26,6 +26,12 @@ if(isset($_POST['cadastrarColaborador'])) {
 
 if(isset($_DELETE['deletarColaborador'])) {
     $colaborador = ColaboradorFactory::service()->delete($_DELETE['deletarColaborador']);
-    return json_encode($colaborador);
+    echo json_encode($colaborador);
+    exit;
+}
+
+if(isset($_GET['buscarColaborador'])) {
+    $colaborador = ColaboradorFactory::repository()->buscarColaborador($_GET['buscarColaborador']);
+    echo json_encode($colaborador, JSON_OBJECT_AS_ARRAY);
     exit;
 }

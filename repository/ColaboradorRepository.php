@@ -63,6 +63,18 @@ class ColaboradorRepository {
             return Conexao::getConexao()->query($sql);
         } else return false;
     }
+
+    public static function buscarColaborador($id) {
+        $sql = "SELECT * FROM colaborador WHERE col_id = $id";
+        $result = Conexao::getConexao()->fetch($sql);
+        $col = $result[0];
+        $colaborador = new Colaborador($col->col_nome, '');
+        $colaborador->setId($col->col_id);
+        $colaborador->setLogin($col->col_login);
+        $colaborador->setStatus($col->col_status);
+        $colaborador->setFuncao($col->col_funcao);
+        return $colaborador;
+    }
 }
 
 ?>
