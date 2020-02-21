@@ -6,7 +6,7 @@ $pagina->head("Cadastrar Sprint");
 ?>
 
 <div id="ds_conteudo">
-  
+
   <h1 class="sp_titulo">Criar Sprint</h1>
   <hr class="sp_divisao" />
 
@@ -28,7 +28,7 @@ $pagina->head("Cadastrar Sprint");
         <input type="number" class="form-control" min="1" max="30" id="qtdDiasSprint" name="qtdDiasSprint" placeholder="Quantidade dias">
       </div>
     </div>
-    
+
     <div class="datas-dias">
 
     </div>
@@ -38,6 +38,23 @@ $pagina->head("Cadastrar Sprint");
     </div>
   </form>
 
+  <br>
+
+  <table id="tabela-sprint" class="table table-striped table-bordered" style="width:100%">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Data Criação</th>
+        <th scope="col">Quant. Programador</th>
+        <th scope="col">Quant. horas</th>
+        <th scope="col">Quant. Tarefas</th>
+        <th scope="col">Ações</th>
+      </tr>
+    </thead>
+
+    <tbody></tbody>
+  </table>
 </div>
 
 <br>

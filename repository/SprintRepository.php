@@ -12,19 +12,27 @@ class SprintRepository
 
     public function findAll()
     {
-        $sql = "SELECT * FROM sprint;";
+        $sql = "select *, 
+        (select case when SUM(date_part('hour', tar_horas_estimada::time)) = 0 then 0 else SUM(date_part('hour', tar_horas_estimada::time)) end
+                from tarefa where tar_sprint = sprint.spt_id) as horas,
+            (select case when count(*) = 0 then 0 else count(*) end from tarefa where tar_sprint = sprint.spt_id) as qtd_tarefas
+        from sprint order by spt_data_inicio desc;";
         $sprints = Conexao::getConexao()->fetch($sql);
         $lista = array();
         foreach ($sprints as $key => $value) {
-
+            
             $id = $value->spt_id;
             $nome = $value->spt_nome;
             $data_inicio = $value->spt_data_inicio;
             $data_fim = $value->spt_data_fim;
             $qtd_col = $value->spt_qtd_colaborador;
-
+            $horas = $value->horas;
+            $qtd_taretas = $value->qtd_tarefas;
+            
             $sprint = new Sprint($nome, $data_inicio, $data_fim, $qtd_col);
-            $sprint->setId($id);
+                $sprint->setId($id);
+                $sprint->setHoras($horas);
+                $sprint->setQtdTarefas($qtd_taretas);
 
             array_push($lista, $sprint);
         }

@@ -10,6 +10,8 @@ class Sprint  implements JsonSerializable {
 	private $qtdCol;
 	private $tarefa = array();
 	private $dias = array();
+	private $horas;
+	private $qtdTarefas;
     
     public function __construct($nome, $data_inicio, $data_fim, $qtd_col) {
         $this->nome = $nome;
@@ -78,6 +80,22 @@ class Sprint  implements JsonSerializable {
 		array_push($this->dias, $data);
 	}
 
+	public function getHoras(){
+		return $this->horas;
+	}
+
+	public function setHoras($horas) {
+		$this->horas = $horas;
+	}
+
+	public function getQtdTarefas() {
+		return $this->qtdTarefas;
+	}
+
+	public function setQtdTarefas($QtdTarefas) {
+		$this->qtdTarefas = $QtdTarefas;
+	}
+
 	public function jsonSerialize() {
         return [
             'id'   => $this->getId(),
@@ -85,7 +103,9 @@ class Sprint  implements JsonSerializable {
 			'data_inicio' => $this->getDataInicio(),
 			'data_fim' => $this->getDataFim(),
 			'qtd_colaboradores' => $this->getQtdCol(),
-			'tarefas' => $this->getTarefa()
+			'tarefas' => $this->getTarefa(),
+			'horas' => $this->getHoras(), 
+			'qtd_tarefas' => $this->getQtdTarefas()
 		];
     }
 }

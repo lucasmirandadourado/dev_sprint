@@ -1,8 +1,9 @@
-$(document).ready(function () {
-    let colaborador = new Colaborador();
-    colaborador.getColaboradores();
-    // $('div#tabela-colaboradores_filter > label > input').attr('autocomplete', 'off');
+let colaborador = new Colaborador();
+colaborador.getColaboradores();
+    
 
+$(document).ready(function () {
+    
     $(document).on('click', '#btn-addColaborador', function () {
         $('#modalCadastrarColaborador').modal('show');
     });

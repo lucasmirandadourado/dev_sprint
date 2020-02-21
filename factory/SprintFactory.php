@@ -1,6 +1,7 @@
 <?php
 require_once(dirname(__FILE__).'/../repository/SprintRepository.php');
 require_once(dirname(__FILE__).'/../repository/TarefaRepository.php');
+require_once(dirname(__FILE__).'/../service/SprintService.php');
 
 class SprintFactory
 {

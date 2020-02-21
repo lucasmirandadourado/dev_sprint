@@ -6,9 +6,7 @@ require_once(dirname(__FILE__) . '/../factory/SprintFactory.php');
 class SprintService
 {
 
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     public static function cadastrarSprint($form)
     {
@@ -34,12 +32,15 @@ class SprintService
 
         $tarefaDao = new TarefaRepository();
         $tarefas = $tarefaDao->findAllBySprint($id);
-        var_dump($tarefas);
         $sprint = new Sprint($sprintDao->getNome(), $sprintDao->getDataInicio(), $sprintDao->getDataInicio(), $sprintDao->getQtdCol());
         $sprint->setId($sprintDao->getId());
         foreach ($tarefas as $tarefa) {
             $sprint->addTarefa($tarefa);
         }
         return $sprint;
+    }
+
+    public static function findAll() {
+        return SprintFactory::repository()->findAll();        
     }
 }

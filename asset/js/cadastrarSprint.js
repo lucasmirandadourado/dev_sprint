@@ -1,4 +1,63 @@
+class Sprint {
+
+    getSprints() {
+        $.get('../controller/SprintController.php', 'buscarSprints', function(result){
+            
+            let data = Array();
+            $(result).each(function (index, value) {
+                data.push([
+                    value.id,
+                    value.name,
+                    moment(value.data_inicio).format('DD/MM/YYYY'),
+                    value.qtd_colaboradores,
+                    value.horas == null ? 0 : value.horas,
+                    value.qtd_tarefas,
+                    `<img data-id="${value.id}" alt="Editar sprint" class="edit" src="https://img.icons8.com/material-outlined/24/000000/pencil-tip.png" />
+                    <img data-id="${value.id}" alt="Deletar sprint" class="delete" src="https://img.icons8.com/material-outlined/24/000000/add-trash.png" />`
+                ]);
+            })
+
+            $('#tabela-sprint').DataTable({
+                "data": data,
+                initComplete: function() {
+                    $(this.api().table().container()).
+                    find('input').parent().wrap('<form>').parent()
+                    .attr('autocomplete', 'off');
+                },
+                "columns": [
+                    { "title": "Código" },
+                    { "title": "Nome" },
+                    { "title": "Data início" },
+                    { "title": "Qtd. Programador" },
+                    { "title": "Qtd. horas" },
+                    { "title": "Hr Tarefas" },
+                    { "title": "" }
+                ], 
+                "language": {
+                    "lengthMenu": "Apresentar _MENU_ itens por página",
+                    "zeroRecords": "Não foi encontrado itens",
+                    "info": "Apresentar page _PAGE_ de _PAGES_",
+                    "infoEmpty": "No records available",
+                    "infoFiltered": "(filtro de _MAX_ total itens)"                    
+                }
+            });
+
+        }, "json");
+    }
+
+    salvarSprint() {
+        $.post('../controller/SprintController.php', data, function (result) {
+                console.log(result);
+                if(result[0]) {
+                    window.location = './cadastrar-tarefas.php';
+                }
+        }, 'json');
+    }
+}
+
+
 $(document).ready(function (e) {
+
 
     $('#exampleModal').on('shown.bs.modal', function () {
         $('#exampleModal').medal('show')
@@ -9,37 +68,6 @@ $(document).ready(function (e) {
     $(document).on('change', '#qtdDiasSprint', function (e) {
         let dias = $('#qtdDiasSprint').val();
         adicionarDias(dias);
-    });
-
-    $(document).on('click', '#sp-salvar-sprint', function (e) {
-        e.preventDefault();
-
-        let nome = $('#nome').val();
-        let dias = $('#qtdDiasSprint').val();
-        let qtdDev = $('#qtdDevs').val();
-        let datas = $('input[name="data[]"]').serializeArray();
-        let data = {
-            "salvarSprint": true,
-            "sprint": {
-                "nome": nome,
-                "dias": dias,
-                "qtdDev": qtdDev,
-                "datas": datas
-            }
-        }
-
-        $.ajax({
-            url: '../controller/SprintController.php',
-            method: "POST",
-            data: data,
-            dataType: 'json',
-            success: function (result) {
-                console.log(result);
-                if(result[0]) {
-                    window.location = './cadastrar-tarefas.php';
-                }
-            }
-        });
     });
 
 
@@ -65,3 +93,7 @@ function adicionarDias(quantidade) {
         $('#dias').append(input);
     }
 }
+
+
+sprints = new Sprint();
+sprints.getSprints();
