@@ -41,6 +41,7 @@ class SprintRepository
 
     public function save(Sprint $sprint)
     {
+        var_dump($sprint);
         $data_inicio = new DateTime($sprint->getDataInicio());
         $data_fim = new DateTime($sprint->getDataFim());
         $sql = "INSERT INTO sprint(

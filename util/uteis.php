@@ -3,7 +3,9 @@
 function converterFormEmArray($form) {
     $formulario = array();
     foreach ($form as $key => $value) {
-        $formulario[$value['name']] = trim($value['value']);
+        if(strpos($value['name'], '[]')) {
+            $formulario[$value['name']][] = $value['value'];
+        } else $formulario[$value['name']] = trim($value['value']);
     }
     return $formulario;
 }

@@ -20,7 +20,7 @@
             <div class="row">
                 <div class="form-group">
                     <label for="login">Login</label>
-                    <input type="text" class="form-control" id="login" name="login">
+                    <input type="text" class="form-control" id="login" autofocus name="login">
                 </div>
             </div>
             <div class="row">

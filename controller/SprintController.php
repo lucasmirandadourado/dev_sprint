@@ -2,7 +2,7 @@
 
 require_once(dirname(__FILE__).'/../factory/SprintFactory.php');
 
-if (isset($_POST['salvarSprint'])) {
+if (isset($_POST['cadastrarSprint'])) {
     echo json_encode(SprintFactory::service()->cadastrarSprint($_POST));
     exit;
 }

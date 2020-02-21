@@ -45,8 +45,9 @@ class Sprint {
         }, "json");
     }
 
-    salvarSprint() {
-        $.post('../controller/SprintController.php', data, function (result) {
+    // TODO: 
+    salvarSprint(form) {
+        $.post('../controller/SprintController.php', {"cadastrarSprint": form}, function (result) {
                 console.log(result);
                 if(result[0]) {
                     window.location = './cadastrar-tarefas.php';
@@ -55,15 +56,10 @@ class Sprint {
     }
 }
 
+sprint = new Sprint();
+sprint.getSprints();
 
 $(document).ready(function (e) {
-
-
-    $('#exampleModal').on('shown.bs.modal', function () {
-        $('#exampleModal').medal('show')
-    })
-
-    $('#tarefas-tabela').DataTable();
 
     $(document).on('change', '#qtdDiasSprint', function (e) {
         let dias = $('#qtdDiasSprint').val();
@@ -82,6 +78,12 @@ $(document).ready(function (e) {
             $('.datas-dias').append(dias);
         }
     });
+
+    $(document).on('click', '#sp-salvar-sprint', function(e) {
+        e.preventDefault();
+        let form = $('#formCadastrar').serializeArray();
+        sprint.salvarSprint(form);
+    });
 });
 
 function adicionarDias(quantidade) {
@@ -95,5 +97,3 @@ function adicionarDias(quantidade) {
 }
 
 
-sprints = new Sprint();
-sprints.getSprints();

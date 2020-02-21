@@ -2,6 +2,7 @@
 
 require_once(dirname(__FILE__) . '/../model/Tarefa.php');
 require_once(dirname(__FILE__) . '/../factory/SprintFactory.php');
+require_once(dirname(__FILE__).'/../util/uteis.php');
 
 class SprintService
 {
@@ -10,20 +11,23 @@ class SprintService
 
     public static function cadastrarSprint($form)
     {
-        $sprint = $form['sprint'];
-        $nome = $sprint['nome'];
-        $qtdDev = $sprint['qtdDev'];
-        $dias = $sprint['dias'];
-        $datas = $sprint['datas'];
-
-        $spt = new Sprint($nome, $datas[0]['value'], $datas[$dias - 1]['value'], $qtdDev);
+        $formulario = converterFormEmArray($form['cadastrarSprint']);
+                var_dump($formulario);
+        $nome = $formulario['nome'];
+        $qtdDev = $formulario['qtdDevs'];
+        $dias = $formulario['dias'];
+        $datas = $formulario['data[]'];
+        
+        $spt = new Sprint($nome, $datas[0], $datas[$dias - 1], $qtdDev);
+        
         if (count($datas) > 0) {
             foreach ($datas as $key => $value) {
-                $spt->addDia($value['value']);
+                $spt->addDia($value);
             }
-
-            return SprintFactory::repository()->save($spt);
+            $spt->setDataFim(end($spt->getDatas()));
         }
+        // FIXME: Bug quando for criar o objeto. Verificar as datas.
+        return SprintFactory::repository()->save($spt);
     }
 
     public static function buscarInfoSprint($id)
