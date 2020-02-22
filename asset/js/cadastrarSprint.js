@@ -54,6 +54,10 @@ class Sprint {
                 }
         }, 'json');
     }
+
+    buscarSprint(id) {
+        window.location = `./cadastrar-tarefas.php?sprint=${id}`;
+    }
 }
 
 sprint = new Sprint();
@@ -83,6 +87,13 @@ $(document).ready(function (e) {
         e.preventDefault();
         let form = $('#formCadastrar').serializeArray();
         sprint.salvarSprint(form);
+    });
+
+    $(document).on('click', '.edit', function(e){
+        e.preventDefault();
+        let id = $(this).data('id');
+        console.log(id)
+        sprint.buscarSprint(id);
     });
 });
 

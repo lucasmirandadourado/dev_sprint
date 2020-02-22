@@ -41,7 +41,6 @@ class SprintRepository
 
     public function save(Sprint $sprint)
     {
-        var_dump($sprint);
         $data_inicio = new DateTime($sprint->getDataInicio());
         $data_fim = new DateTime($sprint->getDataFim());
         $sql = "INSERT INTO sprint(
@@ -80,5 +79,22 @@ class SprintRepository
         $sprint = new Sprint($nome, $data_inicio, $data_fim, $qtd_col);
         $sprint->setId($id);
         return $sprint;
+    }
+
+    public function find($id) {
+        $sql = "select *, 
+        (select case when SUM(date_part('hour', tar_horas_estimada::time)) = 0 then 0 else SUM(date_part('hour', tar_horas_estimada::time)) end
+                from tarefa where tar_sprint = sprint.spt_id) as horas,
+            (select case when count(*) = 0 then 0 else count(*) end from tarefa where tar_sprint = sprint.spt_id) as qtd_tarefas
+        from sprint where spt_id = $id  order by spt_data_inicio desc;";
+        $result = Conexao::getConexao()->fetch($sql);
+        if(count($result) > 0) {
+            $spt = $result[0];    
+            $sprint = new Sprint($spt->spt_nome, $spt->spt_data_inicio, $spt->spt_data_fim, $spt->spt_qtd_colaborador);
+            $sprint->setQtdTarefas($spt->qtd_tarefas);
+            $sprint->setHoras($spt->horas);
+            $sprint->setId($spt->spt_id);
+            return $spt;
+        }
     }
 }

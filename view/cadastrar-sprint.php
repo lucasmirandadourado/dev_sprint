@@ -59,6 +59,45 @@ $pagina->head("Cadastrar Sprint");
 
 <br>
 
+<div class="modal" id="modalEditarColaborador" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Editar Colaborador</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="cadastrar_mensagem"></div>
+        <form id="cadastrarColaborador" method="POST">
+
+          <div class="form-group">
+            <label for="id">Código</label>
+            <input type="number" class="form-control" name="edt_col_id" id="edt_col_id" disabled>
+          </div>
+
+          <div class="form-group">
+            <label for="edt_nome">Nome</label>
+            <input type="text" name="edt_nome" id="edt_nome" class="form-control" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="edt_qtd_dev">Quantidade de colaborador</label>
+            <input type="text" name="edt_qtd_dev" id="edt_qtd_dev" class="form-control" required>
+          </div>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <a href="" id="spt-salvar-colaborador" class="btn btn-primary">Salvar</a>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fecha</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <?php
 $pagina->addJS('../asset/js/cadastrarSprint.js');
 $pagina->footer();

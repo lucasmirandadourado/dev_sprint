@@ -18,3 +18,9 @@ if(isset($_GET['buscarSprints'])) {
     echo json_encode($sprints, JSON_OBJECT_AS_ARRAY);
     exit;
 }
+
+if(isset($_GET['buscarSprint'])) {
+    $sprit = SprintFactory::service()->find($_GET['buscarSprint']);
+    echo json_encode($sprit, JSON_FORCE_OBJECT);
+    exit;
+}

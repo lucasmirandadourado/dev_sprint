@@ -7,7 +7,7 @@ class Pagina {
 
     public function __construct() {
         require_once('sessao.php');
-        // array_push($this->js, '../asset/chartjs/canvasjs.min.js');
+        array_push($this->js, '../asset/chartjs/canvasjs.min.js');
         array_push($this->js, '../asset/js/moment.min.js');
         array_push($this->js, '../asset/js/jquery-3.3.1.min.js');
         array_push($this->js, '../asset/js/bootstrap.min.js');
@@ -24,34 +24,9 @@ class Pagina {
     }
 
     public function head($nomeSprint = "") {       
-        
-        echo "<!DOCTYPE html>
-            <html lang='pt-br'>        
-            <head>
-                <meta charset='UTF-8'>
-                <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-                <meta http-equiv='X-UA-Compatible' content='ie=edge'>
-                <title>$nomeSprint</title>
-                
-                <link rel='shortcut icon' type='image/x-icon' href='../asset/img/icon.ico'/>";
-        
-            foreach ($this->css as $value) {
-                echo '<link rel="stylesheet" href='.$value.'>';            
-            }
-            
-        echo '</head><body>
-        
-        <div class="sp-container">
-        <div id="menu">
-            <a href="./"><img src="../asset/img/scrum-head.png" class="logo" alt="Dev Sprint"></a>
-            <div id="menu-itens">
-                <a href="../view/cadastrar-colaborador.php" id="colaborador">COLABORADOR</a>
-                <a href="../view/cadastrar-sprint.php" id="sprints">SPRINT</a>
-                <a href="#" id="tarefas">TAREFAS</a>
-                <a href="#" id="sair">SAIR</a>
-            </div>
-        </div>
-        ';
+        require_once(dirname(__FILE__).'/../template/header.php');    
+        cabecalho($nomeSprint, $this->css);
+        require_once(dirname(__FILE__).'/../template/menu.php');
     }
 
     public function addJS($js) {
@@ -66,14 +41,6 @@ class Pagina {
         foreach ($this->js as $value) {
             echo "<script src=".$value."></script>";
         }        
-        echo "
-        
-        <div id='footer'>
-            <div id='desenvolvedor'>Desenvolvedor: Lucas Dourado</div>
-            <img src='../asset/img/scrum-head.png' class='logo-footer' alt='Dev Sprint'>
-        </div>
-
-        </body>        
-        </html>";
+        require_once(dirname(__FILE__).'/../template/footer.php');
     }
 }

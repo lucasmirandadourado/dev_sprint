@@ -12,7 +12,7 @@ class SprintService
     public static function cadastrarSprint($form)
     {
         $formulario = converterFormEmArray($form['cadastrarSprint']);
-                var_dump($formulario);
+        
         $nome = $formulario['nome'];
         $qtdDev = $formulario['qtdDevs'];
         $dias = $formulario['dias'];
@@ -42,6 +42,10 @@ class SprintService
             $sprint->addTarefa($tarefa);
         }
         return $sprint;
+    }
+
+    public static function find($id) {
+        return SprintFactory::repository()->find($id);
     }
 
     public static function findAll() {
