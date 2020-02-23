@@ -11,33 +11,44 @@ class Tarefa {
                 let colaboradores = result.colaboradores;
 
                 $('#nome-sprint').text(tarefas.name);
-                $('#colaborador-sprint').text(tarefas.qtd_colaboradores);
                 $('#dias-sprint').text(tarefas.data_inicio);
 
-                let row = '';
+                let data = Array();
                 if (tarefas.tarefas.length > 0) {
                     tarefas.tarefas.forEach(element => {
-                        row += `<tr data-tarefa="${element.id}">
-                            <td>${element.codigo}</td>
-                            <td>${element.titulo}</td>
-                            <td>${element.descricao}</td>
-                            <td>${moment(element.hora_estimada, 'hh:mm:ss').format('hh:mm')}</td>
-                        </tr>`;
+                        data.push([
+                            element.codigo,
+                            element.titulo,
+                            element.descricao,
+                            moment(element.hora_estimada, 'hh:mm:ss').format('hh:mm'),
+                            `<img data-id="${element.id}" alt="Editar sprint" class="edit" src="https://img.icons8.com/material-outlined/24/000000/pencil-tip.png" />
+                            <img data-id="${element.id}" alt="Deletar sprint" class="delete" src="https://img.icons8.com/material-outlined/24/000000/add-trash.png" />`
+                        ]);
                     });
                 }
-                let data = [];
-                $(colaboradores).each((index, element) => {
-                    data.push({
-                        id: element.id,
-                        text: element.nome
-                    });
-                });
 
-                $('#colaborador').select2({
-                    placeholder: 'Selecione o colaborador',
-                    data: data
+                $('#tabela-tarefas').DataTable({
+                    "data": data,
+                    initComplete: function () {
+                        $(this.api().table().container()).
+                            find('input').parent().wrap('<form>').parent()
+                            .attr('autocomplete', 'off');
+                    },
+                    "columns": [
+                        { "title": "Código" },
+                        { "title": "Título" },
+                        { "title": "Descrição" },
+                        { "title": "Horas" },
+                        { "title": "" }
+                    ],
+                    "language": {
+                        "lengthMenu": "Apresentar _MENU_ itens por página",
+                        "zeroRecords": "Não foi encontrado itens",
+                        "info": "Apresentar page _PAGE_ de _PAGES_",
+                        "infoEmpty": "No records available",
+                        "infoFiltered": "(filtro de _MAX_ total itens)"
+                    }
                 });
-                $('#tarefas-tabela-row').html(row);
 
             }
         });
@@ -54,17 +65,9 @@ class Tarefa {
             dataType: 'json',
             data: dados,
             success: function (result) {
-
-                moment.locale('pt-br');
-                console.log(moment(tarefa.hora_estimada).format('h:mm:ss'));
-
-                $('#tarefas-tabela-row').append(`<tr>
-                    <td>${tarefa.codigo}</td>
-                    <td>${tarefa.titulo}</td>
-                    <td>${tarefa.descricao}</td>
-                    <td>${tarefa.hora_estimada}</td>
-                </tr>`);
-
+                setTimeout(function(e) {
+                    window.location.reload();
+                }, 1500);
             }
         });
     }
@@ -81,10 +84,23 @@ class Tarefa {
                 $('#titulo').val(result.titulo);
                 $('#descricao').val(result.descricao);
                 $('#id').val(result.id);
-                
-                $('#colaborador').val(result.colaborador);
-                $('#colaborador').trigger('change'); 
+
             }
+        });
+    }
+
+    deletar(id) {
+        $.ajax({
+            url: '../controller/TarefasController.php',
+            method: "DELETE",
+            dataType: 'json',
+            data: { delete: id },
+            success: function (result) {
+                console.log(result);
+                if(result) {
+                    window.location.reload();
+                }
+            } 
         });
     }
 }
@@ -94,6 +110,7 @@ let id_sprint = $('#sprint_id').val();
 tar.getTarefas(id_sprint);
 
 $(document).on('click', '#salvar-sprint', function (e) {
+    e.preventDefault();
     let tarefa = $('#tarefas-form').serializeArray();
     let id_sprint = $('#sprint_id').val();
     tar.salvarTarefa(tarefa, id_sprint);
@@ -103,3 +120,19 @@ $(document).on('click', '#tarefas-tabela-row tr td', function () {
     let id = $(this).closest('tr').data('tarefa');
     tar.apresentarForm(id);
 });
+
+document.getElementById('addTarefa').addEventListener('click', function (e) {
+    $('#modalCadastrarTarefa').modal('show');
+});
+
+
+$(document).on('click', '.delete', function(e) {
+    $('#modalDeletarTarefa').modal('show');
+    let id = $(this).data('id');
+    $('#idTarefa').val(id);
+});
+
+$(document).on('click', '#deletar-tarefa', function(e)  {
+    let id = $('#idTarefa').val();
+    tar.deletar(id);
+})

@@ -15,7 +15,7 @@ class Sprint {
                     `<img data-id="${value.id}" alt="Editar sprint" class="edit" src="https://img.icons8.com/material-outlined/24/000000/pencil-tip.png" />
                     <img data-id="${value.id}" alt="Deletar sprint" class="delete" src="https://img.icons8.com/material-outlined/24/000000/add-trash.png" />`
                 ]);
-            })
+            });
 
             $('#tabela-sprint').DataTable({
                 "data": data,

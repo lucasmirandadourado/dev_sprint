@@ -2,6 +2,15 @@
 
 require_once(dirname(__FILE__).'/../factory/TarefaFactory.php');
 require_once(dirname(__FILE__).'/../factory/ColaboradorFactory.php');
+$_DELETE = array();
+$_PUT = array();
+
+if (!strcasecmp($_SERVER['REQUEST_METHOD'], 'DELETE')) {
+    parse_str(file_get_contents('php://input'), $_DELETE);
+}
+if (!strcasecmp($_SERVER['REQUEST_METHOD'], 'UPDATE')) {
+    parse_str(file_get_contents('php://input'), $_PUT);
+}
 
 if(isset($_GET['sprint'])) {  
     $tarefas = TarefaFactory::repository()->findAllBySprint($_GET['sprint']);  
@@ -22,5 +31,10 @@ if(isset($_POST['salvarTarefa'])) {
 
 if (isset($_POST['buscarTarefa'])) {  
     echo json_encode(TarefaFactory::repository()->find($_POST['buscarTarefa']));    
+    exit;
+}
+
+if(isset($_DELETE)) {
+    echo json_encode(TarefaFactory::service()->delete($_DELETE['delete']));
     exit;
 }

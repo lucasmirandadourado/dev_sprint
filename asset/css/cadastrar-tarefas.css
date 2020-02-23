@@ -1,5 +1,6 @@
 div#addTarefa {
     padding: 15px 0;
+    float: right;
 }
 
 #addTarefa .row form {
@@ -27,6 +28,10 @@ a#salvar-sprint {
 }
 
 input#bug {
-    width: 20px;
-    height: 20.1px;
+    width: 15px;
+}
+
+td:nth-child(5) {
+    display: flex;
+    justify-content: center;
 }

@@ -44,6 +44,11 @@ class TarefaService {
         
         return TarefaFactory::repository()->save($tarefa, $form['salvarTarefa']);
     }
+
+    public function delete($id) {
+        $tarefa = new TarefaRepository();
+        return $tarefa->delete($id);
+    }
 }
 
 ?>

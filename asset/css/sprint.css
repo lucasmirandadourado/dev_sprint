@@ -62,12 +62,12 @@ a:hover {
     text-decoration: none;
 }
 
-.sp-container {
+/* .sp-container {
     display: flex;
     flex-direction: column;
     height: 100vh;
     justify-content: space-between;
-}
+} */
 
 div#ds_conteudo {
     display: flex;
@@ -199,13 +199,27 @@ select#colaborador {
 
 div#info-sprint {
     display: flex;
+    justify-content: left;
+    margin-top: 10px;
+}
+
+.container {
+    height: 100%;
+}
+
+#info-sprint label {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #e9eef2;
+    margin: 0 2px;
+    padding: 1px 2px 1px 9px;
     justify-content: center;
+    text-align: center;
 }
 
 #info-sprint div {
-    color: #f7f7f7;
-    background-color: #26b16a;
-    border-color: #26b16a;
+    display: flex;
     width: 90%;
     margin-top: 20px;
 }
@@ -216,7 +230,6 @@ div#info-sprint {
 }
 
 span#nome-sprint, span#colaborador-sprint, span#dias-sprint {
-    color: var(--amarelo);
     font-weight: 400;
     margin-left: 6px;
 }
@@ -228,7 +241,9 @@ span#nome-sprint, span#colaborador-sprint, span#dias-sprint {
 
 #tarefas-form {
     display: flex;
-    flex-direction: column;
+    flex-direction: column;    
+    margin: 0 15px auto;
+    padding: 0;
 }
 
 #btn-right {
