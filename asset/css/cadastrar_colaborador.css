@@ -1,4 +1,4 @@
-.edit, .delete {
+.edit, .delete, .edt_delete {
     cursor: pointer;
 }
 

@@ -94,7 +94,34 @@ class SprintRepository
             $sprint->setQtdTarefas($spt->qtd_tarefas);
             $sprint->setHoras($spt->horas);
             $sprint->setId($spt->spt_id);
-            return $spt;
+
+            $result = Conexao::getConexao()->fetch("select * from dias_sprint where sprint_id = $id");
+            if(count($result) > 0) {
+                foreach ($result as $key => $value) {
+                    $sprint->addDia($value->data);
+                }
+            }
+            return $sprint;
         }
+    }
+
+    public function delete($id) {
+        $sql = "DELETE FROM dias_sprint where sprint_id = $id";
+        Conexao::getConexao()->query($sql);
+
+        $sql = "DELETE FROM sprint WHERE spt_id = $id";
+        $result = Conexao::getConexao()->query($sql);
+        if($result) {
+            return true;   
+        } else return false;
+    }
+
+    public function deleteDia($data, $id) {
+        $sql = "DELETE FROM dias_sprint where sprint_id = $id and data ='$data'";
+        $result = Conexao::getConexao()->query($sql);
+
+        if($result) {
+            return true;   
+        } else return false;
     }
 }

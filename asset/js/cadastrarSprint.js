@@ -45,7 +45,6 @@ class Sprint {
         }, "json");
     }
 
-    // TODO: 
     salvarSprint(form) {
         $.post('../controller/SprintController.php', {"cadastrarSprint": form}, function (result) {
                 console.log(result);
@@ -56,7 +55,57 @@ class Sprint {
     }
 
     buscarSprint(id) {
-        window.location = `./cadastrar-tarefas.php?sprint=${id}`;
+        $.get('../controller/SprintController.php', {"buscarSprint": id}, function(result) {
+            
+            $('#edt_nome').val(result.name);
+            $('#edt_qtdDevs').val(result.qtd_colaboradores);
+            $('#edt_qtdDiasSprint').val(Object.keys(result.dias).length);
+            
+            let tabelaDias = $('#dias_sprint').DataTable();
+            tabelaDias.clear().draw();
+            $(Object.values(result.dias)).each((element, index, array) => {                
+                tabelaDias.row.add([
+                    index,
+                    `<img data-id="${index}" data-spt="${result.id}" alt="Remover dia" class="edt_delete" 
+                            src="https://img.icons8.com/material-outlined/24/000000/add-trash.png" />`
+                ]).draw( false );
+            });
+        }, "json");
+    }
+
+    delete(id) {
+        $.ajax({
+            url: '../controller/SprintController.php',
+            method: "DELETE",
+            dataType: 'json',
+            data: { delete: id },
+            success: function (result) {
+                console.log(result);
+                if(result) {
+                    window.location.reload();
+                }
+            } 
+        });
+    }
+
+    editar(form) {
+
+    }
+
+    deleteDia(id, sprint) {
+        $.ajax({
+            url: '../controller/SprintController.php',
+            method: "DELETE",
+            dataType: 'json',
+            data: { deleteDia: id, spt: sprint },
+            success: function (result) {
+                console.log(result);
+                if(result) {
+                    let tabelaDias = $('#dias_sprint').DataTable();
+                    tabelaDias.row('.selected').remove().draw( false );
+                }
+            }  
+        })
     }
 }
 
@@ -70,7 +119,6 @@ $(document).ready(function (e) {
         adicionarDias(dias);
     });
 
-
     $(document).on('change', '#qtdDiasSprint', function () {
         let qtd = $('#qtdDiasSprint').val();
         $('.datas-dias').html('');
@@ -83,7 +131,7 @@ $(document).ready(function (e) {
         }
     });
 
-    $(document).on('click', '#sp-salvar-sprint', function(e) {
+    $(document).on('click', '#spt-salvar-sprint', function(e) {
         e.preventDefault();
         let form = $('#formCadastrar').serializeArray();
         sprint.salvarSprint(form);
@@ -92,19 +140,50 @@ $(document).ready(function (e) {
     $(document).on('click', '.edit', function(e){
         e.preventDefault();
         let id = $(this).data('id');
-        console.log(id)
+        $('#modalEditarSprint').modal('show');
         sprint.buscarSprint(id);
     });
+
+    $(document).on('click', '.delete', function(e){
+        $('#modalDeletarSprint').modal('show');
+        let id = $(this).data('id');
+        $('#idSprint').val(id);
+    });
+
+    $(document).on('click', '#deletar-sprint', function(e){
+        e.preventDefault();
+        let id = $('#idSprint').val();
+        sprint.delete(id);
+    });
+
+    $(document).on('click', '#addSprint', function(e) {
+        $('#modalCadastrarSprint').modal('show');
+    });
+
+    $(document).on('click', '.edt_delete', function(e){
+        e.preventDefault();
+        let dia = $(this).data('id');
+        let spt = $(this).data('spt');
+        let tabelaDias = $('#dias_sprint').DataTable();
+
+        if ( $(this).closest('tr').hasClass('selected') ) {
+            $(this).closest('tr').removeClass('selected');
+        } else {
+            tabelaDias.$('.selected').removeClass('selected');
+            $(this).closest('tr').addClass('selected');
+        }
+
+        sprint.deleteDia(dia, spt);
+    });
+
+    $(document).on('click', '#addDia', function(e) {
+        e.preventDefault();
+        let tabela = $('#add_dias_sprint').DataTable();
+        tabela.row.add([
+            $('#data').val(),
+            `<img alt="Remover dia" class="edt_delete" 
+                            src="https://img.icons8.com/material-outlined/24/000000/add-trash.png" />`
+        ]).draw(false);
+    })
 });
-
-function adicionarDias(quantidade) {
-    for (let i = 1; i <= quantidade; i++) {
-        let input = `<div class="form-group">
-                        <label for="dia_${i}">Dia ${i}</label>
-                        <input type="date" class="form-control" name="dia_${i}" id="dia_${i}">
-                    </div>`;
-        $('#dias').append(input);
-    }
-}
-
 

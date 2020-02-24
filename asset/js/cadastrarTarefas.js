@@ -9,10 +9,12 @@ class Tarefa {
             success: function (result) {
                 let tarefas = result.tarefas;
                 let colaboradores = result.colaboradores;
+                let qtd = tarefas.qtd_colaboradores;
 
                 $('#nome-sprint').text(tarefas.name);
                 $('#dias-sprint').text(tarefas.data_inicio);
-
+                $("#colaborador-sprint").text(qtd);
+                
                 let data = Array();
                 if (tarefas.tarefas.length > 0) {
                     tarefas.tarefas.forEach(element => {
@@ -102,6 +104,10 @@ class Tarefa {
                 }
             } 
         });
+    }
+
+    editar(form) {
+        
     }
 }
 

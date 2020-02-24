@@ -105,7 +105,8 @@ class Sprint  implements JsonSerializable {
 			'qtd_colaboradores' => $this->getQtdCol(),
 			'tarefas' => $this->getTarefa(),
 			'horas' => $this->getHoras(), 
-			'qtd_tarefas' => $this->getQtdTarefas()
+			'qtd_tarefas' => $this->getQtdTarefas(),
+			'dias' => $this->getDatas()
 		];
     }
 }

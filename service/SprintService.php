@@ -51,4 +51,12 @@ class SprintService
     public static function findAll() {
         return SprintFactory::repository()->findAll();        
     }
+
+    public static function delete($id) {
+        return SprintFactory::repository()->delete($id);
+    }
+
+    public static function deleteDia($id, $spt) {
+        return SprintFactory::repository()->deleteDia($id, $spt);
+    }
 }

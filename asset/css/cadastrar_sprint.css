@@ -46,3 +46,9 @@ div#btn-salvar-tarefas {
         flex-direction: column;
     }
 }
+
+button#addSprint {
+    width: 120px;
+    align-self: flex-end;
+}
+

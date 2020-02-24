@@ -263,7 +263,7 @@ div#mensagem {
     font-size: 0.9rem;
 }
 
-.delete:hover {
+.delete:hover, img.edt_delete:hover {
     background-color: #ff000029;
     border-radius: 3px;
 }
@@ -271,4 +271,17 @@ div#mensagem {
 .edit:hover {
     background-color: #3bda3b4a;;
     border-radius: 3px;
+}
+
+a#addDia {
+    margin-bottom: 8px;
+}
+
+div#add_dia {
+    display: flex;
+}
+
+input#data {
+    flex: 1;
+    margin-right: 13px;
 }

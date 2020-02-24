@@ -9,7 +9,7 @@ $pagina->head("Cadastrar Tarefas");
 <div class="container">
     <div id="info-sprint" class="row">
 
-        <h3>Sprint</h3>
+        <h3>Tarefas</h3>
         <hr class="sp_divisao">
 
         <input type="hidden" name="sprint_id" id="sprint_id" value="<?= $_GET['sprint'] ?>">
@@ -21,10 +21,10 @@ $pagina->head("Cadastrar Tarefas");
         <label for="dias-sprint">Quantidade de Dias<span id="dias-sprint"></span></label>
 
     </div>
-    <br>
-    <div id="addTarefa">
+    <div class="row" id="addTarefa">
         <button class="btn btn-primary" id="addTarefa">Adicionar Tarefa</button>
     </div>
+    <br>
 
     <table id="tabela-tarefas" class="table table-striped table-bordered" style="width:100%">
         <thead>
