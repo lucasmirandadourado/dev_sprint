@@ -13,7 +13,8 @@ class Sprint {
                     value.horas == null ? 0 : value.horas,
                     value.qtd_tarefas,
                     `<img data-id="${value.id}" alt="Editar sprint" class="edit" src="https://img.icons8.com/material-outlined/24/000000/pencil-tip.png" />
-                    <img data-id="${value.id}" alt="Deletar sprint" class="delete" src="https://img.icons8.com/material-outlined/24/000000/add-trash.png" />`
+                    <img data-id="${value.id}" alt="Deletar sprint" class="delete" src="https://img.icons8.com/material-outlined/24/000000/add-trash.png" />
+                    <img data-id="${value.id}" alt="Tarefas do sprint" title="Tarefas do sprint" class="tarefas" src="../asset/icon//icons8-tarefas-50.png" />`
                 ]);
             });
 
@@ -105,6 +106,19 @@ class Sprint {
                     tabelaDias.row('.selected').remove().draw( false );
                 }
             }  
+        });
+    }
+
+    addDia(spt, data) {
+        $.ajax({
+            url: '../controller/SprintController.php',
+            method: "PUT",
+            dataType: 'json',
+            data: { addDia: data, spt: spt },
+            success: function (result) {
+                console.log(result);
+                
+            }  
         })
     }
 }
@@ -141,6 +155,7 @@ $(document).ready(function (e) {
         e.preventDefault();
         let id = $(this).data('id');
         $('#modalEditarSprint').modal('show');
+        $('#sptId').val(id);
         sprint.buscarSprint(id);
     });
 
@@ -184,6 +199,24 @@ $(document).ready(function (e) {
             `<img alt="Remover dia" class="edt_delete" 
                             src="https://img.icons8.com/material-outlined/24/000000/add-trash.png" />`
         ]).draw(false);
+    });
+
+    $(document).on('click', '#edt_addDia', function(e) {
+        e.preventDefault();
+        let tabela = $('#dias_sprint').DataTable();
+        let spt = $('#sptId').val();
+        let data = $('#edt_data').val();
+        tabela.row.add([
+            data,
+            `<img data-spt="${spt}" alt="Remover dia" class="edt_delete" 
+                            src="https://img.icons8.com/material-outlined/24/000000/add-trash.png" />`
+        ]).draw(false);
+        sprint.addDia(spt, data);
+    });
+
+    $(document).on('click', '.tarefas', function(e){
+        let spt = $(this).data('id');
+        window.location = `./cadastrar-tarefas.php?sprint=${spt}`;
     })
 });
 

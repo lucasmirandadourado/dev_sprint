@@ -273,7 +273,7 @@ div#mensagem {
     border-radius: 3px;
 }
 
-a#addDia {
+a#addDia, a#edt_addDia {
     margin-bottom: 8px;
 }
 
@@ -281,7 +281,12 @@ div#add_dia {
     display: flex;
 }
 
-input#data {
+input#data, input#edt_data {
     flex: 1;
     margin-right: 13px;
+}
+
+img.tarefas {
+    width: 25px;
+    cursor: pointer;
 }

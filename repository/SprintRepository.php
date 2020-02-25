@@ -124,4 +124,16 @@ class SprintRepository
             return true;   
         } else return false;
     }
+
+    public function addDia($spt, $data) {
+        $sql = "INSERT INTO public.dias_sprint(
+            data, sprint_id)
+            VALUES ('$data', $spt);";
+        if($spt < 1) {
+            return false;
+        }
+        
+        $result = Conexao::getConexao()->query($sql);
+        return $result === false ? false : true;
+    }
 }

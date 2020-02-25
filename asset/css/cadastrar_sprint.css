@@ -52,3 +52,14 @@ button#addSprint {
     align-self: flex-end;
 }
 
+div#dias_sprint_wrapper {
+    width: 100%;
+}
+
+td:nth-child(7) {
+    display: flex;
+}
+
+img.delete {
+    margin: 0 4px;
+}

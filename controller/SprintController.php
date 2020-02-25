@@ -7,7 +7,7 @@ $_PUT = array();
 if (!strcasecmp($_SERVER['REQUEST_METHOD'], 'DELETE')) {
     parse_str(file_get_contents('php://input'), $_DELETE);
 }
-if (!strcasecmp($_SERVER['REQUEST_METHOD'], 'UPDATE')) {
+if (!strcasecmp($_SERVER['REQUEST_METHOD'], 'PUT')) {
     parse_str(file_get_contents('php://input'), $_PUT);
 }
 
@@ -41,5 +41,12 @@ if(isset($_DELETE['delete'])) {
 
 if(isset($_DELETE['deleteDia'])) {
     echo json_encode(SprintFactory::service()->deleteDia($_DELETE['deleteDia'], $_DELETE['spt']));
+    exit;
+}
+
+if(isset($_PUT['addDia'])) {
+    $data = $_PUT['addDia'];
+    $spt = $_PUT['spt'];
+    echo json_encode(SprintFactory::service()->addDia($spt, $data));
     exit;
 }

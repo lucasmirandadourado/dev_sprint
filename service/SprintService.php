@@ -59,4 +59,8 @@ class SprintService
     public static function deleteDia($id, $spt) {
         return SprintFactory::repository()->deleteDia($id, $spt);
     }
+
+    public static function addDia($spt, $data) {
+        return SprintFactory::repository()->addDia($spt, $data);
+    }
 }
