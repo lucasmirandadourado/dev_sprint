@@ -69,6 +69,11 @@ a:hover {
     justify-content: space-between;
 } */
 
+.sp-container {
+    display: flex;
+    flex-direction: column;
+}
+
 div#ds_conteudo {
     display: flex;
     flex-wrap: wrap;
@@ -289,4 +294,62 @@ input#data, input#edt_data {
 img.tarefas {
     width: 25px;
     cursor: pointer;
+}
+
+.scrum {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+div#to-do {
+    flex: 1;
+    background-color: var(--amarelo);
+}
+
+div#in-progress {
+    flex: 1;
+    background-color: var(--laranja);
+}
+
+div#done {
+    flex: 1;
+    background-color: var(--green);
+}
+
+.status_tarefa {
+    text-align: center;
+    color: white;
+    font-size: 1.1rem;
+    border: 1px solid #fff;
+    margin: 0 -1px;
+}
+
+div#sprint {
+    margin: 15px 0px;
+}
+
+.task {
+    background-color: #a9a59d;
+    border-radius: 3px;
+    color: white;
+    margin: 7px;
+    cursor: grab;
+}
+
+.task_head {
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: space-between;
+    padding: 3px 10px;
+}
+
+.task_horas_estimada img {
+    align-self: center;
+    width: 20px;
+    padding-bottom: 2px;
+}
+.task_titulo {
+    padding: 3px 10px;
+    background-color: #585555;
+    border-radius: 3px;
 }

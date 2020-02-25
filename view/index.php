@@ -1,30 +1,36 @@
 <?php
-  require_once('../template/Pagina.php');
-  $pagina = new Pagina();
-  $pagina->addCSS('../asset/css/sprint.css');
-  $pagina->head("Home");
+require_once('../template/Pagina.php');
+$pagina = new Pagina();
+$pagina->head("Home");
 ?>
 
-  <div id="ds_conteudo">
-    <div id="selecionarSprint">
-      
-
-      <div id="editarSprint">
-        <select name="selecionar-sprints" id="selecionar-sprints"></select>
-        <a href="#" class="btn" id="spt-editarSprint">Editar</a>
-        <a href="#" class="btn" id="spt-criarSprint">Criar</a>
-      </div>
-
-      <div id="mensagem"></div>
-
+<div id="ds_conteudo">
+  <div id="sprint">
+    <select name="select-sprint" id="select-sprint"></select>
+  </div>
+  <div class="scrum">
+    <div id="to-do">
+      <p class="status_tarefa">To-do</p>
+      <div id="add_tarefas_to_do"></div>      
     </div>
-    <div id="grafico">
-      <div id="chartContainer" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
+    <div id="in-progress">
+      <p class="status_tarefa">in Progress</p>
+      <div id="add_tarefas_in_progress"></div>     
+    </div>
+    <div id="done">
+      <p class="status_tarefa">Done</p>
+      <div id="add_tarefas_done"></div>     
+      
     </div>
   </div>
 </div>
+</div>
 
 <?php
-  $pagina->addJS('../asset/js/sprint.js');
-  $pagina->footer();
+$pagina->addJS('../asset/js/sprint.js');
+$pagina->footer();
 ?>
+
+<!-- <div id="grafico">
+      <div id="chartContainer" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
+    </div> -->

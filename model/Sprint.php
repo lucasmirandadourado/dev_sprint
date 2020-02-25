@@ -72,6 +72,10 @@ class Sprint  implements JsonSerializable {
 		array_push($this->tarefa, $tarefa);
 	}
 
+	public function addMerge($arrayTarefas) {
+		$this->tarefa = array_merge($this->tarefa, $arrayTarefas);
+	}
+
 	public function getDatas() {
 		return $this->dias;
 	}

@@ -1,6 +1,7 @@
 <?php
 
 require_once(dirname(__FILE__).'/../factory/ConexaoFactory.php');
+require_once(dirname(__FILE__).'/../factory/TarefaFactory.php');
 require_once('./../model/Sprint.php');
 
 class SprintRepository
@@ -101,6 +102,10 @@ class SprintRepository
                     $sprint->addDia($value->data);
                 }
             }
+
+            $tarefas = TarefaFactory::repository()->findBySprint($id);
+            $sprint->addMerge($tarefas);
+            // var_dump($sprint);
             return $sprint;
         }
     }
@@ -135,5 +140,10 @@ class SprintRepository
         
         $result = Conexao::getConexao()->query($sql);
         return $result === false ? false : true;
+    }
+
+    public function buscarListaSprint() {
+        $sql = "SELECT spt_id, spt_nome FROM sprint order by spt_data_inicio desc;";
+        return Conexao::getConexao()->fetch($sql);
     }
 }

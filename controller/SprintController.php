@@ -50,3 +50,8 @@ if(isset($_PUT['addDia'])) {
     echo json_encode(SprintFactory::service()->addDia($spt, $data));
     exit;
 }
+
+if(isset($_GET['buscarListaSprint'])) {
+    echo json_encode(SprintFactory::service()->buscarListaSprint());
+    exit;
+}

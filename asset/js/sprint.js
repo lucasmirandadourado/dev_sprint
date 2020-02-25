@@ -1,170 +1,64 @@
-$(document).ready(function () {
-    $('#sprint').DataTable();
-    __onFindSprint();
-    
-    $(document).on('change', '#selecionar-sprints', function(e){
-        let id = $(this).find(':selected').data('id')
-        $.ajax({
-            type: "POST",
-            url: "../controller/SprintController.php",
-            data: {"info_sprint" : id},
-            dataType: 'json',
-            success: function (data) {          
-                $('#horas_trabalhadas').html();
-                let qtd_tarefa = data.tarefas.length;
-                $('#qtd_tarefa').html(qtd_tarefa);
-                $('#bugs').html(0);
-                let dias = [
-                    new Date(2020, 0, 3),
-                    new Date(2020, 0, 4),
-                    new Date(2020, 0, 5),
-                    new Date(2020, 0, 6),
-                    new Date(2020, 0, 7),
-                    new Date(2020, 0, 8),
-                    new Date(2020, 0, 9),
-                    new Date(2020, 0, 10),
-                    new Date(2020, 0, 11),
-                    new Date(2020, 0, 12)
-                ];
-                let dados = dadosGraficoLinha(data.tarefas.length, 10, dias);               
-                
-                let tarefas = [];
-                let media = Math.round(qtd_tarefa/10);
+class Sprint {
+    buscarSprint() {
+        $.get("../controller/SprintController.php", "buscarListaSprint", function (result) {
 
-                for (let index = 0; index < 5; index++) {
-                    let tar = qtd_tarefa - Math.round(media*index);
-                    tarefas.push({x: new Date(2020, 0, 3+index), y: tar});       
-                }
+            let data = Array();
+            result.forEach(element => {
+                data.push({
+                    id: element.spt_id,
+                    text: element.spt_nome
+                });
+            });
+            let select = $('#select-sprint').select2({
+                placeholder: 'Selecione o sprint',
+                width: '200px',
+                data: data
+            });
 
-                dadosTarefasEntregues(data.tarefas, 10);
-                // __onGrafico(dados, tarefas, data.name);
-            }
-        });
-    });
-
-    $(document).on('click', '#spt-editarSprint', function(e){
-        let sprint = $("option:selected").val();
-        if(sprint > 0 && sprint !== undefined ) {
-            $('#mensagem').html('');
-            window.location = `./cadastrar-tarefas.php?sprint=${sprint}`;
-        } else {
-            $('#mensagem').html('Selecione o sprint.');
-            $('#mensagem').css('display', 'flex');
-        }
-    });
-});
-
-function dadosTarefasEntregues(tarefas, dias) {
-    let tarefasConcluidas = tarefas.filter(tar => {
-        if(tar.tar_data_finalizada != null) return true;
-    });
-
-    let qtdTarefasConcluidas = tarefasConcluidas.length;
-    console.log(qtdTarefasConcluidas)
-}
-
-function dadosGraficoLinha(qtdTarefas, qtdDias, dias) {
-    let dados = [];
-    let media = Math.round(qtdTarefas/qtdDias);
-    
-    for (let i = 0; i < qtdDias; i++) {
-        let tar = qtdTarefas -  Math.round(media*i);
-        dados.push({x: dias[i], y: tar});       
+        }, "json");
     }
-    return dados;
+
+    buscarDadosSprint(id) {
+        $.get('../controller/SprintController.php', { "buscarSprint": id }, function (result) {
+            
+            let arrayTareas = result.tarefas;
+            $.each(arrayTareas, function (i, e) {
+                let hora_estimada = moment(e.hora_estimada, 'HH:mm:ss').format('HH:mm');
+                let horas_lancadas = (e.horas_lancadas != null ? ` - ${moment(e.horas_lancadas, 'HH:mm:ss').format('HH:mm')}` : '');
+                let task = `<div class="task">
+                    <div class="task_head">
+                        <span>ID: ${e.codigo}</span>
+                        <span class="task_horas_estimada">
+                            <img src="../asset/icon/icons8-time-24.png" alt=""> ${hora_estimada} ${horas_lancadas}
+                        </span>
+                    </div>
+                    <div class="task_titulo">${e.titulo}</div>
+                </div>`;
+
+                if (e.data_iniciada == null) {
+                    $('#add_tarefas_to_do').append(task);
+                }
+                if (e.data_iniciada != null && e.data_finalizacao == null) {
+                    $('#add_tarefas_in_progress').append(task);
+                }
+                if (e.data_iniciada != null && e.data_finalizacao != null) {
+                    $('#add_tarefas_done').append(task);
+                }
+            });
+
+
+        }, 'json');
+    }
 }
 
-function horasLancadas(tarefas) {
-    
-}
+let sprint = new Sprint();
 
-function __onFindSprint() {
+$(document).ready(function () {
+    sprint.buscarSprint();
 
-    $.ajax({
-        type: "POST",
-        url: "../controller/SprintController.php",
-        data: "buscarSprint",
-        dataType: 'text',
-        success: function (data) {          
-            $('#selecionar-sprints').html(data)
-            $('#tabela').append(data);
-        }
-    });
-
-}
-
-function __onFindTarefas() {
-
-    $.post("./controller/SprintController.php", {"buscarTarefas": 1}, function (data) {
-        let dados = [];
-        let size = data.length;        
-        $(data).each(function( index, element){
-            dados.push({y: (size - index)});
-        });
-
-        let tarefas = [];
-          
-        __onGrafico(dados, tarefas, data[1]['spt_nome']);
-    }, "json");
-}
-
-function __onGrafico(data, tarefas, nomeGrafico) {
-    $('.canvasjs-chart-container').remove();
-    var chart = new CanvasJS.Chart("chartContainer", {
-        animationEnabled: true,
-        theme: "light2",
-        title:{
-            text: nomeGrafico
-        },
-        axisX:{
-            valueFormatString: "DD MMM",
-            crosshair: {
-                enabled: true,
-                snapToDataPoint: true
-            }
-        },
-        axisY: {
-            title: "Tarefas",
-            crosshair: {
-                enabled: true
-            }
-        },
-        toolTip:{
-            shared:true
-        },  
-        legend:{
-            cursor:"pointer",
-            verticalAlign: "bottom",
-            horizontalAlign: "left",
-            dockInsidePlotArea: true,
-            itemclick: toogleDataSeries
-        },
-        data: [{
-            type: "line",
-            showInLegend: true,
-            name: "Tarefas",
-            markerType: "square",
-            xValueFormatString: "DD MMM, YYYY",
-            color: "#f25e5e",
-            dataPoints: tarefas
-        },
-        {
-            type: "line",
-            showInLegend: false,
-            name: "Dias",
-            lineDashType: "dash",
-            dataPoints: data
-        }]
-    });
-    chart.render();
-    $('.canvasjs-chart-credit').remove();
-}
-
-function toogleDataSeries(e){
-	if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-		e.dataSeries.visible = false;
-	} else{
-		e.dataSeries.visible = true;
-	}
-	chart.render();
-}
+    $(document).on('select2:select', function (e) {
+        e.preventDefault();
+        var data = e.params.data.id;
+        sprint.buscarDadosSprint(data);
+    })
+});

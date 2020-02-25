@@ -80,11 +80,33 @@ class TarefaRepository
         return $tar;
     }
 
-    public function delete($id) {
+    public function delete($id)
+    {
         $sql = "DELETE FROM tarefa WHERE tar_id = $id";
         $result = Conexao::getConexao()->query($sql);
-        if($result) {
+        if ($result) {
             return true;
         } else return false;
+    }
+
+    public function findBySprint($id) {
+        $sql = "select * from tarefa where tar_sprint = $id ";
+        $resultado = Conexao::getConexao()->fetch($sql);
+        $array = array();
+        foreach ($resultado as $key => $value) {
+            $tar = new Tarefa($value->tar_titulo, $value->tar_horas_estimada);
+            $tar->setId($value->tar_id);
+            $tar->setCodigo($value->tar_codigo);
+            $tar->setDescricao($value->tar_descricao);
+            $tar->setColaborador($value->tar_colaborador);
+            $tar->setBug($value->tar_bug);
+            $tar->setTarefaBug($value->tar_tarefa_bug);
+            $tar->setdataCriacao($value->tar_data_criacao);
+            $tar->setdataIniciada($value->tar_data_iniciada);
+            $tar->setDataFinalizada($value->tar_data_finalizada);
+            $tar->sethorasLancada($value->tar_horas_lancada);
+            array_push($array, $tar);
+        }
+        return $array;
     }
 }

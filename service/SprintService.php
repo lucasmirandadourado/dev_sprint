@@ -63,4 +63,8 @@ class SprintService
     public static function addDia($spt, $data) {
         return SprintFactory::repository()->addDia($spt, $data);
     }
+
+    public static function buscarListaSprint() {
+        return SprintFactory::repository()->buscarListaSprint();
+    }
 }
