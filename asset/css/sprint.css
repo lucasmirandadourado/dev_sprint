@@ -72,6 +72,7 @@ a:hover {
 .sp-container {
     display: flex;
     flex-direction: column;
+    height: 100%;
 }
 
 div#ds_conteudo {
@@ -301,19 +302,44 @@ img.tarefas {
     margin-bottom: 10px;
 }
 
-div#to-do {
+div#to-do, div#in-progress, div#done {
     flex: 1;
+    background-color: gainsboro;
+    margin: 1px;
+}
+
+#todo p.status_tarefa {
+    background-color: var(--cinza);
+}
+
+#in-progress p.status_tarefa {
     background-color: var(--amarelo);
 }
 
-div#in-progress {
-    flex: 1;
-    background-color: var(--laranja);
+#done p.status_tarefa {
+    background-color: #198c33;
 }
 
-div#done {
-    flex: 1;
-    background-color: var(--green);
+#to-do .task .task_titulo {
+    background-color: #b5b0b0;
+}
+
+#in-progress .task .task_titulo {
+    background-color: #f3aa6c;
+}
+
+#done .task .task_titulo {
+    background-color: #63b776;
+}
+
+#done .task {
+    background-color: #28a745;
+}
+#to-do .task {
+    background-color: grey;
+}
+#in-progress .task {
+    background-color: var(--laranja);
 }
 
 .status_tarefa {

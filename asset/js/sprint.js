@@ -11,7 +11,7 @@ class Sprint {
             });
             let select = $('#select-sprint').select2({
                 placeholder: 'Selecione o sprint',
-                width: '200px',
+                width: '100vh',
                 data: data
             });
 
@@ -25,6 +25,7 @@ class Sprint {
             $.each(arrayTareas, function (i, e) {
                 let hora_estimada = moment(e.hora_estimada, 'HH:mm:ss').format('HH:mm');
                 let horas_lancadas = (e.horas_lancadas != null ? ` - ${moment(e.horas_lancadas, 'HH:mm:ss').format('HH:mm')}` : '');
+                
                 let task = `<div class="task">
                     <div class="task_head">
                         <span>ID: ${e.codigo}</span>
@@ -37,13 +38,14 @@ class Sprint {
 
                 if (e.data_iniciada == null) {
                     $('#add_tarefas_to_do').append(task);
+                
                 }
                 if (e.data_iniciada != null && e.data_finalizacao == null) {
                     $('#add_tarefas_in_progress').append(task);
                 }
                 if (e.data_iniciada != null && e.data_finalizacao != null) {
                     $('#add_tarefas_done').append(task);
-                }
+                }                
             });
 
 
