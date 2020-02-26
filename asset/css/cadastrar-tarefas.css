@@ -44,3 +44,7 @@ div#addTarefa {
 #tabela-sprint td:nth-child(7) {
     display: flex;
 }
+
+select#tarefas_bug {
+    display: none;
+}

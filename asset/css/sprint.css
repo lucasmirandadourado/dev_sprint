@@ -342,6 +342,11 @@ div#to-do, div#in-progress, div#done {
     background-color: var(--laranja);
 }
 
+img.bug {
+    width: 25px;
+    margin-right: 4px;
+}
+
 .status_tarefa {
     text-align: center;
     color: white;
@@ -351,7 +356,9 @@ div#to-do, div#in-progress, div#done {
 }
 
 div#sprint {
-    margin: 15px 0px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
 }
 
 .task {
@@ -359,7 +366,7 @@ div#sprint {
     border-radius: 3px;
     color: white;
     margin: 7px;
-    cursor: grab;
+    cursor: pointer;
 }
 
 .task_head {

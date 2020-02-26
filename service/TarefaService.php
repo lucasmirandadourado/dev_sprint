@@ -27,19 +27,22 @@ class TarefaService {
             if($value['name'] == 'tarefa_bug') {
                 $tarefa->setBug($value['value']);
             }
+            if($value['name'] == 'tarefas_bug') {
+                $tarefa->setTarefaBug($value['value']);
+            }
         }
         $mensagem = array();
         if($tarefa->getTitulo() < 3) {
-            array("titulo" => "É necessário adicionar título com melhor descrição.");
+            array_push($mensagem, array("titulo" => "É necessário adicionar título com melhor descrição."));
         }
         if($tarefa->getDescricao() < 10) {
-            array("descricao" => "É necessário inserir uma descrição da tarefa.");
+            array_push($mensagem, array("descricao" => "É necessário inserir uma descrição da tarefa."));
         }
         if($tarefa->getHorasEstimada()) {
-            array("titulo" => "Informe a estimativa da tarefa.");
+            array_push($mensagem, array("titulo" => "Informe a estimativa da tarefa."));
         }
         if(empty($tarefa->getCodigo())) {
-            array("titulo" => "É necessário adicionar código da tarefa.");
+            array_push($mensagem, array("titulo" => "É necessário adicionar código da tarefa."));
         }
         
         return TarefaFactory::repository()->save($tarefa, $form['salvarTarefa']);
@@ -48,6 +51,10 @@ class TarefaService {
     public function delete($id) {
         $tarefa = new TarefaRepository();
         return $tarefa->delete($id);
+    }
+
+    public function buscarTarefaSelect() {
+        return TarefaFactory::repository()->buscarTarefaSelect();
     }
 }
 

@@ -14,7 +14,7 @@ class Tarefa {
                 $('#nome-sprint').text(tarefas.name);
                 $('#dias-sprint').text(tarefas.data_inicio);
                 $("#colaborador-sprint").text(qtd);
-                
+
                 let data = Array();
                 if (tarefas.tarefas.length > 0) {
                     tarefas.tarefas.forEach(element => {
@@ -67,7 +67,7 @@ class Tarefa {
             dataType: 'json',
             data: dados,
             success: function (result) {
-                setTimeout(function(e) {
+                setTimeout(function (e) {
                     window.location.reload();
                 }, 1500);
             }
@@ -99,15 +99,27 @@ class Tarefa {
             data: { delete: id },
             success: function (result) {
                 console.log(result);
-                if(result) {
+                if (result) {
                     window.location.reload();
                 }
-            } 
+            }
         });
     }
 
     editar(form) {
-        
+
+    }
+
+    buscarTarefasSelect() {
+        $.get('../controller/TarefasController.php', {'buscarTarefaSelect': true}, function(result) {
+            $('#tarefas_bug').select2({
+                placeholder: 'Selecione a tarefa',
+                width: '200px',
+                data: result
+            });
+        }, 'json');
+
+        $('#tarefas_bug').css({'display': 'flex'});
     }
 }
 
@@ -119,6 +131,7 @@ $(document).on('click', '#salvar-sprint', function (e) {
     e.preventDefault();
     let tarefa = $('#tarefas-form').serializeArray();
     let id_sprint = $('#sprint_id').val();
+    $('#salvar-sprint').remove();
     tar.salvarTarefa(tarefa, id_sprint);
 });
 
@@ -132,13 +145,18 @@ document.getElementById('addTarefa').addEventListener('click', function (e) {
 });
 
 
-$(document).on('click', '.delete', function(e) {
+$(document).on('click', '.delete', function (e) {
     $('#modalDeletarTarefa').modal('show');
     let id = $(this).data('id');
     $('#idTarefa').val(id);
 });
 
-$(document).on('click', '#deletar-tarefa', function(e)  {
+$(document).on('click', '#deletar-tarefa', function (e) {
     let id = $('#idTarefa').val();
     tar.deletar(id);
-})
+});
+
+$(document).on('click', '#bug', function (e) {
+    $( "#bug" ).prop( "checked", true );
+    tar.buscarTarefasSelect();
+});

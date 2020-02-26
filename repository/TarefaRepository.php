@@ -17,8 +17,7 @@ class TarefaRepository
     {
     }
 
-    public function findAllBySprint($id)
-    {
+    public function findAllBySprint($id){
 
         $sprint = SprintFactory::repository()->buscarInfoSprint($id);
 
@@ -49,8 +48,8 @@ class TarefaRepository
                 tar_titulo, tar_descricao, tar_colaborador, tar_bug, 
                 tar_tarefa_bug, tar_data_criacao, tar_data_iniciada, tar_data_finalizada, 
                 tar_horas_estimada, tar_horas_lancada, tar_sprint, tar_codigo)
-            VALUES ('" . $tarefa->getTitulo() . "', '" . $tarefa->getDescricao() . "', null, null, 
-                null, now()::date, null, null, 
+            VALUES ('" . $tarefa->getTitulo() . "', '" . $tarefa->getDescricao() . "', null, '".$tarefa->getBug()."', 
+                ".$tarefa->getTarefaBug().", now()::date, null, null, 
                 '" . $tarefa->getHorasEstimada() . "', null, $id, '" . $tarefa->getCodigo() . "') RETURNING tar_id;";
         $query = Conexao::getConexao()->fetch($sql);
         $tarefa->setId($query[0]->tar_id);
@@ -59,29 +58,29 @@ class TarefaRepository
         } else return $tarefa;
     }
 
-    public function find($id)
-    {
+    public function find($id) {
 
-        $sql = "select * from tarefa where tar_id = $id ";
+        $sql = "select * from tarefa as tar
+        left join colaborador as col on col.col_id = tar.tar_colaborador
+        where tar_id = $id ";
         $resultado = Conexao::getConexao()->fetch($sql);
-
-        $tar = new Tarefa($resultado->tar_titulo, $resultado->tar_horas_estimada);
-        $tar->setId($resultado->tar_id);
-        $tar->setCodigo($resultado->tar_codigo);
-        $tar->setDescricao($resultado->tar_descricao);
-        $tar->setColaborador($resultado->tar_colaborador);
-        $tar->setBug($resultado->tar_bug);
-        $tar->setTarefaBug($resultado->tar_tarefa_bug);
-        $tar->setdataCriacao($resultado->tar_data_criacao);
-        $tar->setdataIniciada($resultado->tar_data_iniciada);
-        $tar->setDataFinalizada($resultado->tar_data_finalizada);
-        $tar->sethorasLancada($resultado->tar_horas_lancada);
-
+        
+        $tar = new Tarefa($resultado[0]->tar_titulo, $resultado[0]->tar_horas_estimada);
+        $tar->setId($resultado[0]->tar_id);
+        $tar->setCodigo($resultado[0]->tar_codigo);
+        $tar->setDescricao($resultado[0]->tar_descricao);
+        $tar->setColaborador($resultado[0]->tar_colaborador);
+        $tar->setBug($resultado[0]->tar_bug);
+        $tar->setTarefaBug($resultado[0]->tar_tarefa_bug);
+        $tar->setdataCriacao($resultado[0]->tar_data_criacao);
+        $tar->setdataIniciada($resultado[0]->tar_data_iniciada);
+        $tar->setDataFinalizada($resultado[0]->tar_data_finalizada);
+        $tar->sethorasLancada($resultado[0]->tar_horas_lancada);
+        
         return $tar;
     }
 
-    public function delete($id)
-    {
+    public function delete($id) {
         $sql = "DELETE FROM tarefa WHERE tar_id = $id";
         $result = Conexao::getConexao()->query($sql);
         if ($result) {
@@ -108,5 +107,10 @@ class TarefaRepository
             array_push($array, $tar);
         }
         return $array;
+    }
+
+    public function buscarTarefaSelect() {
+        $sql = "SELECT tar_id as id, tar_codigo || ' - ' || tar_titulo as text FROM tarefa order by tar_id desc";
+        return Conexao::getConexao()->fetch($sql);
     }
 }

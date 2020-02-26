@@ -34,7 +34,12 @@ if (isset($_POST['buscarTarefa'])) {
     exit;
 }
 
-if(isset($_DELETE)) {
+if(isset($_DELETE['delete'])) {
     echo json_encode(TarefaFactory::service()->delete($_DELETE['delete']));
+    exit;
+}
+
+if(isset($_GET['buscarTarefaSelect'])) {
+    echo json_encode(TarefaFactory::service()->buscarTarefaSelect());
     exit;
 }
