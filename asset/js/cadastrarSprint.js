@@ -5,6 +5,7 @@ class Sprint {
             
             let data = Array();
             $(result).each(function (index, value) {
+                console.log(value)
                 data.push([
                     value.id,
                     value.name,
@@ -48,9 +49,8 @@ class Sprint {
 
     salvarSprint(form) {
         $.post('../controller/SprintController.php', {"cadastrarSprint": form}, function (result) {
-                console.log(result);
                 if(result[0]) {
-                    window.location = './cadastrar-tarefas.php';
+                    window.location.reload();
                 }
         }, 'json');
     }
@@ -100,7 +100,6 @@ class Sprint {
             dataType: 'json',
             data: { deleteDia: id, spt: sprint },
             success: function (result) {
-                console.log(result);
                 if(result) {
                     let tabelaDias = $('#dias_sprint').DataTable();
                     tabelaDias.row('.selected').remove().draw( false );
@@ -116,8 +115,7 @@ class Sprint {
             dataType: 'json',
             data: { addDia: data, spt: spt },
             success: function (result) {
-                console.log(result);
-                
+                                
             }  
         })
     }
@@ -194,11 +192,13 @@ $(document).ready(function (e) {
     $(document).on('click', '#addDia', function(e) {
         e.preventDefault();
         let tabela = $('#add_dias_sprint').DataTable();
+        let data = $('#data').val();
         tabela.row.add([
-            $('#data').val(),
+            data,
             `<img alt="Remover dia" class="edt_delete" 
                             src="https://img.icons8.com/material-outlined/24/000000/add-trash.png" />`
         ]).draw(false);
+            $('#addDia').append(`<input type="hidden" name="data[]" value="${data}">`);
     });
 
     $(document).on('click', '#edt_addDia', function(e) {

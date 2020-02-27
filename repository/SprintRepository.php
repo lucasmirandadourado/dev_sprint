@@ -42,17 +42,17 @@ class SprintRepository
 
     public function save(Sprint $sprint)
     {
-        $data_inicio = new DateTime($sprint->getDataInicio());
-        $data_fim = new DateTime($sprint->getDataFim());
+        $data_inicio = $sprint->getDataInicio();
+        $data_fim = $sprint->getDataFim();
         $sql = "INSERT INTO sprint(
             spt_nome, 
             spt_data_inicio, 
             spt_data_fim, 
             spt_qtd_colaborador)
         VALUES ('" .
-            $sprint->getNome() . "', '" .
-            $data_inicio->format('yy-m-d') . "', '" .
-            $data_fim->format('yy-m-d') . "', " .
+            $sprint->getNome() . "', '
+            $data_inicio', '
+            $data_fim', " .
             $sprint->getQtdCol() . ") returning spt_id;";
 
         $return = Conexao::getConexao()->fetch($sql);

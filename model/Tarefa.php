@@ -20,6 +20,7 @@ class Tarefa implements JsonSerializable {
     public function __construct($titulo, $horasEstimada) {
         $this->titulo = $titulo;
         $this->setHorasEstimada($horasEstimada);
+        date_default_timezone_set('UTC');
         $this->setdataCriacao(date('d-m-Y'));
     }
 

@@ -26,6 +26,7 @@ class SprintService
             }
             $spt->setDataFim(end($spt->getDatas()));
         }
+        
         // FIXME: Bug quando for criar o objeto. Verificar as datas.
         return SprintFactory::repository()->save($spt);
     }

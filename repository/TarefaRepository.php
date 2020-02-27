@@ -48,8 +48,8 @@ class TarefaRepository
                 tar_titulo, tar_descricao, tar_colaborador, tar_bug, 
                 tar_tarefa_bug, tar_data_criacao, tar_data_iniciada, tar_data_finalizada, 
                 tar_horas_estimada, tar_horas_lancada, tar_sprint, tar_codigo)
-            VALUES ('" . $tarefa->getTitulo() . "', '" . $tarefa->getDescricao() . "', null, '".$tarefa->getBug()."', 
-                ".$tarefa->getTarefaBug().", now()::date, null, null, 
+            VALUES ('" . $tarefa->getTitulo() . "', '" . $tarefa->getDescricao() . "', null, '".($tarefa->getBug() == null ? 'false' : $tarefa->getBug())."', 
+                ".($tarefa->getTarefaBug() == null ? 'null' : $tarefa->getTarefaBug()).", now()::date, null, null, 
                 '" . $tarefa->getHorasEstimada() . "', null, $id, '" . $tarefa->getCodigo() . "') RETURNING tar_id;";
         $query = Conexao::getConexao()->fetch($sql);
         $tarefa->setId($query[0]->tar_id);
