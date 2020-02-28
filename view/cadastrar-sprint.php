@@ -65,8 +65,8 @@ $pagina->head("Cadastrar Sprint");
             <a href="" id="addDia" class="btn btn-primary">Add dia</a>
           </div>
 
+          <div id="mensagem-add_dia"></div>
           <div class="datas-dias">
-
             <table id="add_dias_sprint" class="table table-striped table-bordered" style="width:100%">
               <thead>
                 <tr>
@@ -121,9 +121,10 @@ $pagina->head("Cadastrar Sprint");
 
           <div id="add_dia">
             <input type="date" class="form-control" name="edt_data" id="edt_data">
-            <a href="" id="edt_addDia" class="btn btn-primary">Add dia</a>
+            <a id="edt_addDia" class="btn btn-primary">Add dia</a>
           </div>
 
+          <div id="mensagem-add_dia"></div>
           <div class="datas-dias">
             <table id="dias_sprint" class="table table-striped table-bordered" style="width:100%">
               <thead>

@@ -49,10 +49,20 @@ class Sprint {
 
     salvarSprint(form) {
         $.post('../controller/SprintController.php', {"cadastrarSprint": form}, function (result) {
-                if(result[0]) {
+                if(result.status === undefined & result[0]) {
                     window.location.reload();
+                } else {
+                    if(result.status == false) {
+                        $('#cadastrar_mensagem').html(`<div class="alert alert-danger" role="alert">${result.mensagem}</div>`)
+                    } else {
+                        console.log(result.mensagem);
+                        $('#cadastrar_mensagem').html('');
+                    }
                 }
         }, 'json');
+        setTimeout(function(){
+            $('#cadastrar_mensagem').html('');
+        }, 2000)
     }
 
     buscarSprint(id) {
@@ -185,20 +195,29 @@ $(document).ready(function (e) {
             tabelaDias.$('.selected').removeClass('selected');
             $(this).closest('tr').addClass('selected');
         }
-
-        sprint.deleteDia(dia, spt);
+        tabelaDias.row($(this).parent('tr')).remove().draw();
+        // sprint.deleteDia(dia, spt);
     });
 
     $(document).on('click', '#addDia', function(e) {
         e.preventDefault();
         let tabela = $('#add_dias_sprint').DataTable();
         let data = $('#data').val();
-        tabela.row.add([
-            data,
-            `<img alt="Remover dia" class="edt_delete" 
-                            src="https://img.icons8.com/material-outlined/24/000000/add-trash.png" />`
-        ]).draw(false);
-            $('#addDia').append(`<input type="hidden" name="data[]" value="${data}">`);
+        if(data == ''){
+            $('#mensagem-add_dia').html('<div class="alert alert-danger" role="alert">Por favor insira a data.</div>');
+        } else {
+            $('#mensagem-add_dia').html('');
+            tabela.row.add([
+                data,
+                `<img alt="Remover dia" class="edt_delete" 
+                                src="https://img.icons8.com/material-outlined/24/000000/add-trash.png" />`
+            ]).draw(false);
+                $('#addDia').append(`<input type="hidden" name="data[]" value="${data}">`);
+        }
+
+        setTimeout(function() { 
+            $('#mensagem-add_dia').html('');
+         }, 1000)
     });
 
     $(document).on('click', '#edt_addDia', function(e) {

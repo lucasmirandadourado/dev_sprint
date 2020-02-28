@@ -12,7 +12,10 @@ class SprintService
     public static function cadastrarSprint($form)
     {
         $formulario = converterFormEmArray($form['cadastrarSprint']);
-        
+        $validar = self::validacaoFormulario($formulario);
+        if(!$validar['status']) {
+            return $validar;
+        }
         $nome = $formulario['nome'];
         $qtdDev = $formulario['qtdDevs'];
         $dias = $formulario['dias'];
@@ -67,5 +70,24 @@ class SprintService
 
     public static function buscarListaSprint() {
         return SprintFactory::repository()->buscarListaSprint();
+    }
+
+    private static function validacaoFormulario($formulario) {
+        $status = true;
+        $mensagem = '';
+
+        $dicionario = array(
+            "nome" => "Não foi informado o nome.<br>",
+            "qtdDevs" => "Não foi informado a quantidade de desenvolvedores.<br>",
+            "qtdDiasSprint" => "Não foi informado a quantidade de dias no Sprint.<br>",
+            "data" => "É necessário adicionar os dias."
+        );
+        foreach ($formulario as $key => $value) {
+            if(empty($value)) {
+                $mensagem .= $dicionario[$key];
+                $status = false;                
+            }
+        }
+        return array('status' => $status, 'mensagem' => $mensagem);
     }
 }

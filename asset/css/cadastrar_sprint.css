@@ -63,3 +63,7 @@ td:nth-child(7) {
 img.delete {
     margin: 0 4px;
 }
+
+div#add_dias_sprint_wrapper {
+    width: 100%;
+}
