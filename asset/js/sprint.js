@@ -1,4 +1,5 @@
 class Sprint {
+    
     buscarSprint() {
         $.get("../controller/SprintController.php", "buscarListaSprint", function (result) {
 
@@ -57,7 +58,6 @@ class Sprint {
 
     getDetalhesTarefa(id) {
         $.post('../controller/TarefasController.php', {"buscarTarefa": id}, function(result){
-            console.log(result);
             $('#modalDetalhesTarefa').modal('show');
             $('#idTarefa').val(result.id);
             $('#codigo').val(result.codigo);

@@ -8,7 +8,7 @@
             <div id="menu-itens">
                 <a href="../view/cadastrar-colaborador.php" id="colaborador">COLABORADOR</a>
                 <a href="../view/cadastrar-sprint.php" id="sprints">SPRINT</a>
-                <a href="#" id="tarefas">TAREFAS</a>
+                <!-- <a href="#" id="tarefas">TAREFAS</a> -->
                 <a href="#" id="sair">SAIR</a>
             </div>
         </div>
