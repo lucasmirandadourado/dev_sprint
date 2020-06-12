@@ -77,7 +77,7 @@ class Sprint  implements JsonSerializable {
 	}
 
 	public function getDatas() {
-		return $this->dias;
+		return is_null($this->dias) ? 0 : $this->dias;
 	}
 
 	public function addDia($data) {
@@ -85,15 +85,15 @@ class Sprint  implements JsonSerializable {
 	}
 
 	public function getHoras(){
-		return $this->horas;
+		return is_null($this->horas) ? 0 : $this->horas;
 	}
 
 	public function setHoras($horas) {
-		$this->horas = $horas;
+		$this->horas = is_null($horas) ? 0 : $horas;
 	}
 
 	public function getQtdTarefas() {
-		return $this->qtdTarefas;
+		return is_null($this->qtdTarefas) ? 0 : $this->qtdTarefas;
 	}
 
 	public function setQtdTarefas($QtdTarefas) {

@@ -13,6 +13,11 @@ if (!strcasecmp($_SERVER['REQUEST_METHOD'], 'UPDATE')) {
 }
 
 if(isset($_GET['sprint'])) {  
+    $validar = validarCampo('integer', $_GET['sprint']);
+    if(!$validar['status']) {
+        echo json_encode($validar); 
+        exit;
+    }
     $tarefas = TarefaFactory::repository()->findAllBySprint($_GET['sprint']);  
     $colaboradores = ColaboradorFactory::repository()->findAll();
     echo json_encode(array("tarefas" => $tarefas, "colaboradores" => $colaboradores));

@@ -33,7 +33,7 @@ class Tarefa implements JsonSerializable {
     }
 
     public function getCodigo() {
-		return $this->codigo;
+		return is_null($this->codigo) ? 0 : $this->codigo;
 	}
 
 	public function setCodigo($codigo) {
@@ -41,7 +41,7 @@ class Tarefa implements JsonSerializable {
     }
     
     public function getTitulo(){
-        return $this->titulo;
+        return is_null($this->titulo) ? 0 : $this->titulo;
     }
 
     public function setTitulo($titulo){
@@ -57,7 +57,7 @@ class Tarefa implements JsonSerializable {
     }
 
     public function getColaborador() {
-        return $this->colaborador;
+        return is_null($this->colaborador) ? 0 : $this->colaborador;
     }
 
     public function setColaborador($colaborador) {
@@ -65,7 +65,7 @@ class Tarefa implements JsonSerializable {
     }
 
     public function getBug() {
-        return $this->bug;
+        return is_null($this->bug) ? false : $this->bug;
     }
 
     public function setBug($bug) {
@@ -73,7 +73,7 @@ class Tarefa implements JsonSerializable {
     }
 
     public function getTarefaBug(){
-        return $this->tarefaBug;
+        return is_null($this->tarefaBug) ? '' : $this->tarefaBug;
     }
 
     public function setTarefaBug($tarefaBug){
@@ -81,7 +81,7 @@ class Tarefa implements JsonSerializable {
     }
 
     public function getdataCriacao() {
-        return $this->dataCriacao;
+        return is_null($this->dataCriacao) ? 0 : $this->dataCriacao;
     }
 
     public function setdataCriacao($dataCriacao){
@@ -89,7 +89,7 @@ class Tarefa implements JsonSerializable {
     }
 
     public function getdataIniciada() {
-        return $this->dataIniciada;
+        return is_null($this->dataIniciada) ? 0 : $this->dataIniciada;
     }
 
     public function setdataIniciada($dataIniciada){
@@ -97,7 +97,7 @@ class Tarefa implements JsonSerializable {
     }
 
     public function getDataFinalizada() {
-        return $this->dataFinalizada;
+        return is_null($this->dataFinalizada) ? 0 : $this->dataFinalizada;
     }
 
     public function setDataFinalizada($dataFinalizada) {
@@ -105,7 +105,7 @@ class Tarefa implements JsonSerializable {
     }
 
     public function getHorasEstimada() {
-        return $this->horasEstimada;
+        return is_null($this->horasEstimada) ? 0 : $this->horasEstimada;
     }
 
     public function setHorasEstimada($horasEstimada) {
@@ -113,11 +113,11 @@ class Tarefa implements JsonSerializable {
     }
 
     public function gethorasLancada() {
-        return $this->horasLancada;
+        return is_null($this->horasLancada) ? 0 : $this->horasLancada;
     }
 
     public function sethorasLancada($horasLancada) {
-        $this->horasLancada = $horasLancada;
+        $this->horasLancada = is_null($horasLancada) ? 0 : $horasLancada;
     }
 
     public function jsonSerialize() {

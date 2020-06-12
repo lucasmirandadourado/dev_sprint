@@ -13,9 +13,8 @@ class SprintService
     {
         $formulario = converterFormEmArray($form['cadastrarSprint']);
         $validar = self::validacaoFormulario($formulario);
-        if(!$validar['status']) {
-            return $validar;
-        }
+        if(!$validar['status']) return $validar;
+        
         $nome = $formulario['nome'];
         $qtdDev = $formulario['qtdDevs'];
         $dias = $formulario['dias'];
@@ -34,22 +33,32 @@ class SprintService
         return SprintFactory::repository()->save($spt);
     }
 
-    public static function buscarInfoSprint($id)
-    {
-        $sprintDao = SprintFactory::repository()->buscarInfoSprint($id);
+    public static function buscarInfoSprint($id) {
 
-        $tarefaDao = new TarefaRepository();
-        $tarefas = $tarefaDao->findAllBySprint($id);
-        $sprint = new Sprint($sprintDao->getNome(), $sprintDao->getDataInicio(), $sprintDao->getDataInicio(), $sprintDao->getQtdCol());
-        $sprint->setId($sprintDao->getId());
+        $validar = validarCampo("integer", $id);
+        if(!$validar['status']) return $validar;
+
+        $sprintDao = SprintFactory::repository()->buscarInfoSprint($id);
+        if(!$sprintDao['status']) return $sprintDao;
+
+        $tarefas = TarefaFactory::repository()->findAllBySprint($id);
+
+        $spt = $sprintDao['mensagem'];
+        $sprint = new Sprint($spt->getNome(), $spt->getDataInicio(), $spt->getDataInicio(), $spt->getQtdCol());
+        $sprint->setId($spt->getId());
+        $horas_estimadas_total = 0;
         foreach ($tarefas as $tarefa) {
             $sprint->addTarefa($tarefa);
+            $horas_estimadas_total =+ date('h:i:s', $tarefa->getHorasEstimada());
         }
+        $sprint->setHoras($horas_estimadas_total);
         return $sprint;
     }
 
     public static function find($id) {
-        return SprintFactory::repository()->find($id);
+        $validar = validarCampo("integer", $id);
+        if($validar['status'] == false) return $validar;
+        return SprintFactory::repository()->find($id);    
     }
 
     public static function findAll() {

@@ -70,16 +70,17 @@ class SprintRepository
     {
         $sql = "SELECT * FROM sprint where spt_id = $id;";
         $sprintDao = Conexao::getConexao()->fetch($sql);
+        if(count($sprintDao) > 0) {
+            $id = $sprintDao[0]->spt_id;
+            $nome = $sprintDao[0]->spt_nome;
+            $data_inicio = $sprintDao[0]->spt_data_inicio;
+            $data_fim = $sprintDao[0]->spt_data_fim;
+            $qtd_col = $sprintDao[0]->spt_qtd_colaborador;
 
-        $id = $sprintDao[0]->spt_id;
-        $nome = $sprintDao[0]->spt_nome;
-        $data_inicio = $sprintDao[0]->spt_data_inicio;
-        $data_fim = $sprintDao[0]->spt_data_fim;
-        $qtd_col = $sprintDao[0]->spt_qtd_colaborador;
-
-        $sprint = new Sprint($nome, $data_inicio, $data_fim, $qtd_col);
-        $sprint->setId($id);
-        return $sprint;
+            $sprint = new Sprint($nome, $data_inicio, $data_fim, $qtd_col);
+            $sprint->setId($id);
+            return ['status'=>true, 'mensagem' => $sprint];
+        } else return ['status' => false, 'mensagem' => array()];
     }
 
     public function find($id) {
@@ -105,9 +106,8 @@ class SprintRepository
 
             $tarefas = TarefaFactory::repository()->findBySprint($id);
             $sprint->addMerge($tarefas);
-            // var_dump($sprint);
-            return $sprint;
-        }
+            return ['status' => true, 'mensagem'=>$sprint];
+        } else return ['status' => false, 'mensagen' => array()];
     }
 
     public function delete($id) {
