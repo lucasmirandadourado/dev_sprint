@@ -32,13 +32,12 @@ class ColaboradorRepository {
     public function find($login, $senha) {
         $sql = "select * from colaborador where col_login = '$login' 
             and col_senha = md5('$senha'||'d8ir0uQfFnloK7jt&nc!#5')";
-        $dao = Conexao::getConexao()->fetch($sql);                    
+        $dao = Conexao::getConexao()->fetch($sql);
         $colaborador = new Colaborador($dao[0]->col_nome, $dao[0]->col_senha);
         $colaborador->setId($dao[0]->col_id);
         $colaborador->setFuncao($dao[0]->col_funcao);
         $colaborador->setLogin($dao[0]->col_login);
         $colaborador->setStatus($dao[0]->col_status);
-        
         return $colaborador;
     }
 

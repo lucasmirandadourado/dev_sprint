@@ -1,28 +1,29 @@
 # dev_sprint
-Sistema que faz o controle das tarefas do Sprint. Apresentando as tarefas e gerenciamento dos colaboradores.
+Sistema que faz o controle das tarefas do Sprint. Apresentando as tarefas e gerenciamento dos colaboradores. O nome do sistema foi criado por que na empresa que eu trabalho (Lucas Dourado) temos um arquivo em excel que faz o controle de todas as tarefas do Sprint.
+Nesse arquivo conseguimos gerar conclusões sobre os sucessos e fracasso de cada ciclo de desenvolvimento. Conseguimos analisar se as tarefas estão atrasadas ou adiantadas. 
+Caso você queira contribur no projeto ou usar o código fonte, fique a vontade. :D
+
 
 ## Sprint
-Um sprint é criada definindo a quantidade de dias, tarefas e quem são os desenvolvedores.
+Uma sprint é uma reunião de pessoas envolvidas num projeto para promover um desenvolvimento mais focalizado do projeto. Sprints geralmente duram de uma a três semanas.
+O Sprint poderá ter várias tarefas com prioridades e estimativa de tempo diferentes. Com inicio para começar e finalizar. 
 
-Cada tarefa terá um código, título, descrição, data da criação, data do início, data de finalização. 
 
-### Definições das regras:
- - Quando uma tarefa for concluída e a tarefa estiver com o tempo atrazada o usuário deverá informar porque atrasou (dificuldade técnica, estimativa, ou planejamento). 
- - Se escolher dificuldade técnica deverá informar mais detalhes (campo de texto).
- 
+# CONFIGURAÇÃO 
 ## POSTGRES
 
 CREATE TABLE colaborador (
-  col_id integer NOT NULL DEFAULT serial,
+  col_id serial,
   col_nome character varying(50),
   col_login character varying(30),
   col_senha character varying(50),
   col_status boolean,
-  col_funcao character varying(50)
+  col_funcao character varying(50),
+  CONSTRAINT pk_colaborador_id PRIMARY KEY (col_id)
 );
 
-CREATE TABLE public.sprint (
-  spt_id integer NOT NULL DEFAULT serial,
+CREATE TABLE sprint (
+  spt_id serial,
   spt_nome character varying(30),
   spt_data_inicio date,
   spt_data_fim date,
@@ -31,7 +32,7 @@ CREATE TABLE public.sprint (
 );
 
 CREATE TABLE tarefa (
-  tar_id integer NOT NULL DEFAULT serial,
+  tar_id serial,
   tar_titulo character varying(50),
   tar_descricao text,
   tar_colaborador integer,
@@ -57,7 +58,12 @@ CREATE TABLE dias_sprint (
 
 1;"Lucas Dourado";"lucas";"6c14da109e294d1e8155be8aa4b1ce8e";TRUE;"desenvolvedor"
 
+## Ambiente
+- Para o desenvolvimento, utilizo o vagrant (1)
+- Ver o log no Vagrant ## tail -f /var/log/httpd/error_log
+- Acessar via SSH ## cd /var/www/html/test/
 
-## tail -f /var/log/httpd/error_log
-## cd /var/www/html/test/
-## /home/vagrant/phpunit autenticacao_teste.php
+
+
+(1) - É um software para desenvolvimento virtuais portáteis, utilizando VirtualBox. Para a configuração é criado um arquivo VagrantFile que contém todas as configurações para a criação do ambiente. 
+  - PHP: 7.2.26

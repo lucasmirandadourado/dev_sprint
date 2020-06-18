@@ -10,18 +10,25 @@ function converterFormEmArray($form) {
     return $formulario;
 }
 
-function validarCampo($tipo, $valor) {
-    try {
-        if($tipo=="integer") {
-            
-            if(!is_numeric($valor)) throw new Exception("Não é um valor válido.", 999);
-            if(empty($valor)) throw new Exception("Informe o código do Sprint.", 998);
-            if($valor <= 0) throw new Exception("Sprint inválido.", 998);
-    
-            return ['status'=>true];       
-        } 
-    } catch (\Throwable $th) {
-        return ['status' => false, "Mensagem"=>$th->getMessage()]; 
+function validarCampo($tipo, $valor, $mensagemErro = '') {
+
+    if($tipo=="integer") {        
+        if(!is_numeric($valor)) throw new Exception($mensagemErro == '' ? "Não é um valor válido." : $mensagemErro, 999);
+        if(empty($valor)) throw new Exception($mensagemErro == '' ? "Informe o código do Sprint." : $mensagemErro, 998);
+        if($valor <= 0) throw new Exception($mensagemErro == '' ? "Sprint inválido." : $mensagemErro, 998);
+        return ['status'=>true];       
+    } else if ($tipo == "string") {
+        if(empty(trim($valor))) throw new Exception($mensagemErro == '' ? 'Campo vazio' : $mensagemErro, 997);
+        if(is_null($valor)) throw new Exception($mensagemErro == '' ? 'Campo não pode ser nulo.' : $mensagemErro, 997);
+        return ['status' => true]; 
+    } else if ($tipo == "time") {
+        if(empty(trim($valor))) throw new Exception($mensagemErro == '' ? 'Campo vazio' : $mensagemErro, 996);
+        if(is_null($valor)) throw new Exception($mensagemErro == '' ? 'Campo não pode ser nulo.' : $mensagemErro, 996);
+        return ['status' => true];
     }
 
+}
+
+function converterStringParaHora($valor, $padrao = 'H:i:s', $padraoSaida = 'H:i:s') {
+    return DateTime::createFromFormat($padrao, $valor)->format($padraoSaida);
 }
